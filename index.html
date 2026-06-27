@@ -25,9 +25,16 @@ input,select,textarea{font-family:inherit;}
 .wrap{max-width:1020px;margin:0 auto;padding:0 32px;position:relative;z-index:10;}
 
 /* ── BACKGROUND ── */
-.cafe-bg{position:fixed;inset:0;pointer-events:none;z-index:1;
-  background-image:url('https://giffiles.alphacoders.com/211/211265.gif');
-  background-size:cover;background-position:center;}
+.cafe-bg{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    background-image:url('https://giffiles.alphacoders.com/211/211265.gif');
+    background-size:cover;
+    background-position:center;
+    filter:brightness(.75);
+}
 .cafe-bg::after{content:"";position:absolute;inset:0;background:var(--overlay);transition:background .3s;z-index:2;}
 .string-lights{position:absolute;top:0;left:0;width:100%;height:18px;
   background:radial-gradient(circle at 10% 0,var(--sl) 4px,transparent 6px),
@@ -37,6 +44,8 @@ input,select,textarea{font-family:inherit;}
              radial-gradient(circle at 70% 0,var(--sl) 4px,transparent 6px),
              radial-gradient(circle at 85% 0,var(--sl) 4px,transparent 6px);
   opacity:.7;z-index:5;}
+
+  
 
 /* ── GIFT OVERLAY ── */
 .gift-overlay{position:fixed;inset:0;background:#2E2218;z-index:300;display:flex;align-items:center;justify-content:center;padding:24px;transition:opacity .5s,transform .5s;}
@@ -335,9 +344,66 @@ header{border-bottom:2px dashed var(--border);padding:44px 0 28px;position:relat
 .wish-btns{display:flex;gap:10px;padding-top:4px;}
 .wish-btns button{flex:1;padding:10px;border-radius:30px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
 
+
 /* ── MOCHA STAT CARD ── */
-.stat-mocha{flex:1.7;padding:14px 16px;text-align:left;border-right:1px dashed var(--border);cursor:pointer;transition:background .2s;display:flex;align-items:center;gap:12px;min-width:0;}
-.stat-mocha:hover{background:var(--soft);}
+.stat-mocha{
+    flex:1.7;
+    padding:14px 16px;
+    text-align:left;
+    border-right:1px dashed var(--border);
+    cursor:pointer;
+    transition:background .2s;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+}
+
+.stat-mocha:hover{
+    background:var(--soft);
+}
+
+/* Avatar */
+.stat-mocha img{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+    border:2px solid var(--border);
+    background:#fff;
+}
+
+/* Text beside the avatar */
+.stat-mocha-info{
+    flex:1;
+    min-width:0;
+}
+
+.stat-mocha-label{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--muted);
+}
+
+.stat-mocha-title{
+    font-size:16px;
+    font-weight:700;
+    color:var(--txt);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.stat-mocha-author{
+    font-size:14px;
+    color:var(--muted);
+    font-style:italic;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
 .mocha-stat-icon{font-size:26px;flex-shrink:0;line-height:1;}
 .mocha-stat-body{min-width:0;}
 .mocha-stat-lbl{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:3px;}
@@ -347,6 +413,12 @@ header{border-bottom:2px dashed var(--border);padding:44px 0 28px;position:relat
 /* ── MOCHA REC POPUP ── */
 .rec-overlay{position:fixed;inset:0;background:rgba(30,20,15,.45);z-index:220;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
 .rec-modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:32px 28px;width:100%;max-width:390px;box-shadow:0 20px 50px rgba(46,34,24,.2);text-align:center;position:relative;}
+.rec-pusheen{
+    display:block;
+    width:90px;
+    height:auto;
+    margin:0 auto 14px;
+}
 .rec-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;line-height:1;padding:3px 7px;border-radius:4px;}
 .rec-close:hover{background:var(--soft);}
 .rec-cat-emoji{font-size:38px;margin-bottom:2px;line-height:1;}
@@ -361,9 +433,9 @@ header{border-bottom:2px dashed var(--border);padding:44px 0 28px;position:relat
 .rec-btn-start:hover{opacity:.88;}
 .rec-btn-pick{background:transparent;color:var(--accent);border:1.5px solid var(--accent);border-radius:30px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
 .rec-btn-pick:hover{background:var(--soft);}
-
+ 
 footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed var(--border);font-family:'Lora',serif;font-size:13px;font-style:italic;color:var(--muted);}
-
+ 
 @media(max-width:768px){
   .dash-grid{grid-template-columns:1fr;}
   .goals-layout{grid-template-columns:1fr;}
@@ -377,6 +449,12 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .content{padding:20px;}
   .form-half{grid-template-columns:1fr;}
 }
+ 
+@keyframes petGlow{from{opacity:.4}to{opacity:1}}
+.pet-photo-wrap{position:relative;display:inline-block;cursor:pointer;}
+.pet-photo-wrap img{width:180px;height:180px;object-fit:cover;border-radius:12px;display:block;transition:transform .2s;}
+.pet-photo-wrap:hover img{transform:scale(1.02);}
+
 </style>
 </head>
 <body>
@@ -446,7 +524,7 @@ const BINGO_SQUARES = [
   "Reread a Chapter",
   "Happy Ending"
 ];
-// Index 12 is FREE (centre of 5x5 grid)
+
 const THEMES={
   latte:{bg:"#F4EBE1",soft:"#EFE3D5",border:"#DFD3C3",accent:"#8C6239",muted:"#7D6B5D",faint:"#BFAEA0"},
   sand:{bg:"#F5EFE6",soft:"#E8DFD3",border:"#D8CBB7",accent:"#A07855",muted:"#84715F",faint:"#BCAB96"},
@@ -737,7 +815,7 @@ function mochaRecHTML(){
   const unread=getUnread();
   if(!unread.length)return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()">
     <button class="rec-close" onclick="closeMochaRec()">×</button>
-    <div class="rec-cat-emoji">😿</div>
+      <img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif">
     <p class="rec-tag">Mocha says</p>
     <p class="rec-title" style="font-size:15px;margin-bottom:12px">No unread books!</p>
     <p class="rec-message">Add some new books to your shelf and I'll pick you something wonderful.</p>
@@ -747,8 +825,8 @@ function mochaRecHTML(){
   const msg=MOCHA_MSGS[(b.title.length+b.id.charCodeAt(0))%MOCHA_MSGS.length];
   return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()">
     <button class="rec-close" onclick="closeMochaRec()">×</button>
-    <div class="rec-cat-emoji">🐱</div>
-    <p class="rec-tag">Mocha's Pick for You</p>
+      <img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif">
+    <p class="rec-tag">Pusheen's Pick for You</p>
     <div class="rec-title">${esc(b.title)}</div>
     <div class="rec-author">by ${esc(b.author||"Unknown")}</div>
     ${b.genres&&b.genres.length?`<div class="rec-genres">${b.genres.map(g=>`<span class="rec-genre-pill">${esc(g)}</span>`).join("")}</div>`:""}
@@ -781,18 +859,18 @@ function statsBarHTML(){
   const unread=getUnread();
   const rec=unread.find(b=>b.id===mochaRecId)||unread[0];
   const mochaCell=rec
-    ?`<div class="stat-mocha" onclick="pickMochaRec()" title="Click to see Mocha's recommendation">
-        <div class="mocha-stat-icon">🐱</div>
-        <div class="mocha-stat-body">
-          <div class="mocha-stat-lbl">Mocha's Pick</div>
+    ?`<div class="stat-mocha" onclick="pickMochaRec()" title="Click to see Pusheen's recommendation">
+      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif">
+      <div class="mocha-stat-body">
+          <div class="mocha-stat-lbl">Pusheen's Pick</div>
           <div class="mocha-stat-title">${esc(rec.title)}</div>
           <div class="mocha-stat-author">by ${esc(rec.author||"Unknown")}</div>
         </div>
       </div>`
     :`<div class="stat-mocha" onclick="pickMochaRec()" title="No unread books yet">
-        <div class="mocha-stat-icon">🐱</div>
+      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"></div>
         <div class="mocha-stat-body">
-          <div class="mocha-stat-lbl">Mocha's Pick</div>
+          <div class="mocha-stat-lbl">Pusheen's Pick</div>
           <div class="mocha-stat-none">Add unread books!</div>
         </div>
       </div>`;
@@ -831,12 +909,23 @@ function currentlyReadingHTML(){
   </div>`;
 }
 
+const gifs = [
+  "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTllOHFqY3lvb3g2NHo0Mjd6anUxNzU5Mjl0dzIxNjdkcnQ2NjZhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/JjTeN1ZuJuYik6oDuu/giphy.gif",
+  "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hnYjNieGh3ZGR6d3o1Zm93cWR6NGl0Nmd2cjhnc2UxZ3dvOGlzcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/apow2YS2BEAHB4jV0D/giphy.gif",
+  "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUycW9ybjh4bzEweGozNTJjam1tZjNlMWluNzJ0cWhtaGkwd3hpZzk3cSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/dw4qHGqzP3GCzAAQyQ/source.gif",
+  "https://www.gifcen.com/wp-content/uploads/2022/03/pusheen-gif-6.gif"
+];
+
+const chosen = gifs[0];
+
 function dashboardHTML(){
+
   const read=readBooks(),pct=Math.min(100,Math.round((read.length/goal)*100));
   const recentRead=read.filter(b=>b.dateFinished).sort((a,b)=>b.dateFinished.localeCompare(a.dateFinished)).slice(0,6);
   const q=QUOTES[Math.floor(Date.now()/86400000)%QUOTES.length];
   const note=READING_NOTES[read.length%READING_NOTES.length];
   const favCount=books.filter(b=>b.favorite).length;
+
   return`
     <div class="dash-grid">
       <div>${currentlyReadingHTML()}</div>
@@ -861,10 +950,11 @@ function dashboardHTML(){
       </div>
       <div class="mood-card">
         <h3>Mood Café</h3>
-        <p>Mocha is curled up with a good book.</p>
-        <canvas id="petCanvas" width="180" height="140" onclick="petTheCat()"></canvas>
-        <div class="pet-hearts" id="petHearts">${petHearts}</div>
-        <button class="pet-btn" onclick="petTheCat()">Pet Mocha ♡</button>
+        <p>Pusheen is curled up with a good book.</p>
+<div class="pet-photo-wrap" onclick="petTheCat()">
+    <img id="mochaGif" src="${chosen}" alt="Mocha">
+</div>        <div class="pet-hearts" id="petHearts">${petHearts}</div>
+        <button class="pet-btn" onclick="petTheCat()">Pet Pusheen ♡</button>
       </div>
     </div>
     <div class="recently-read" style="margin-top:20px">
@@ -1095,159 +1185,52 @@ let petState={happy:0,frame:0,blinking:false,washFrame:0,washing:false,tailAngle
 let petAnim=null;
 
 function petTheCat(){
-  petState.happy=Math.min(10,petState.happy+1);
-  petState.washing=false;
+  petState.happy = Math.min(10, petState.happy + 1);
+  petState.washing = false;
+
+  // Change GIF based on number of pets
+  const img = document.getElementById("mochaGif");
+  if(img){
+    if(petState.happy >= 6){
+      img.src = gifs[3];
+    }else if(petState.happy >= 4){
+      img.src = gifs[2];
+    }else if(petState.happy >= 2){
+      img.src = gifs[1];
+    }else{
+      img.src = gifs[0];
+    }
+  }
+
   // Show floating hearts
-  const h=document.getElementById("petHearts");
+  const h = document.getElementById("petHearts");
   if(h){
-    const hearts=["♡","♥","♡","♡"];
-    const count=Math.min(petState.happy,4);
-    h.textContent=hearts.slice(0,count).join(" ");
+    const hearts = ["♡","♥","♡","♡"];
+    const count = Math.min(petState.happy,4);
+    h.textContent = hearts.slice(0,count).join(" ");
+
     clearTimeout(petTimer);
-    petTimer=setTimeout(()=>{if(h)h.textContent="";petState.happy=Math.max(0,petState.happy-1);},2500);
+    petTimer = setTimeout(() => {
+      h.textContent = "";
+      petState.happy = Math.max(0, petState.happy - 1);
+
+      // Update GIF when happiness decreases
+      if(img){
+        if(petState.happy >= 6){
+          img.src = gifs[3];
+        }else if(petState.happy >= 4){
+          img.src = gifs[2];
+        }else if(petState.happy >= 2){
+          img.src = gifs[1];
+        }else{
+          img.src = gifs[0];
+        }
+      }
+    }, 2500);
   }
 }
 
-function drawPetCat(){
-  const canvas=document.getElementById("petCanvas");
-  if(!canvas)return;
-  const ctx=canvas.getContext("2d");
-  const W=180,H=140;
-  canvas.width=W;canvas.height=H;
 
-  if(petAnim)cancelAnimationFrame(petAnim);
-
-  // Auto-blink and idle washing
-  let blinkTimer=0,washTimer=0;
-
-  function frame(){
-    petAnim=requestAnimationFrame(frame);
-    ctx.clearRect(0,0,W,H);
-
-    blinkTimer++;washTimer++;
-    if(blinkTimer>100){petState.blinking=true;}
-    if(blinkTimer>106){petState.blinking=false;blinkTimer=0;}
-    if(washTimer>220&&!petState.washing){petState.washing=true;petState.washFrame=0;}
-    if(petState.washing){petState.washFrame++;if(petState.washFrame>80){petState.washing=false;washTimer=0;}}
-
-    petState.tailAngle+=petState.tailDir*0.025;
-    if(petState.tailAngle>0.5||petState.tailAngle<-0.5)petState.tailDir*=-1;
-
-    const isDark=document.body.classList.contains("dark");
-    const bodyCol=isDark?"#A07860":"#C8A878";
-    const markCol=isDark?"#7A5840":"#9A7850";
-    const whiteCol=isDark?"#C8C0B8":"#FDFAF7";
-    const noseCol="#E0A0A0";
-    const cx=90,cy=80;
-
-    // Shadow
-    ctx.save();ctx.globalAlpha=0.12;ctx.fillStyle="#000";
-    ctx.beginPath();ctx.ellipse(cx,cy+35,38,9,0,0,Math.PI*2);ctx.fill();
-    ctx.restore();
-
-    // Tail
-    ctx.save();ctx.translate(cx-18,cy+10);ctx.rotate(petState.tailAngle-0.3);
-    ctx.strokeStyle=bodyCol;ctx.lineWidth=7;ctx.lineCap="round";
-    ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(-30,-10,-24,-32);ctx.stroke();
-    // Tail tip lighter
-    ctx.strokeStyle=whiteCol;ctx.lineWidth=3;
-    ctx.beginPath();ctx.moveTo(-20,-28);ctx.quadraticCurveTo(-26,-36,-24,-42);ctx.stroke();
-    ctx.restore();
-
-    // Body
-    ctx.fillStyle=bodyCol;
-    ctx.beginPath();ctx.ellipse(cx,cy+10,36,28,0,0,Math.PI*2);ctx.fill();
-    // Belly
-    ctx.fillStyle=whiteCol;
-    ctx.beginPath();ctx.ellipse(cx+2,cy+14,22,18,0,0,Math.PI*2);ctx.fill();
-
-    // Front paws
-    if(petState.washing){
-      // Right paw raised to face
-      const wa=Math.sin(petState.washFrame*0.2)*0.25;
-      ctx.save();ctx.translate(cx+14,cy+32);ctx.rotate(-0.8+wa);
-      ctx.fillStyle=bodyCol;ctx.beginPath();ctx.ellipse(0,-12,7,14,0,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle=whiteCol;ctx.beginPath();ctx.ellipse(0,-6,4,8,0,0,Math.PI*2);ctx.fill();
-      ctx.restore();
-      // Left paw normal
-      ctx.fillStyle=bodyCol;ctx.beginPath();ctx.ellipse(cx-14,cy+36,7,8,0,0,Math.PI*2);ctx.fill();
-    } else {
-      ctx.fillStyle=bodyCol;
-      ctx.beginPath();ctx.ellipse(cx-14,cy+36,7,8,0,0,Math.PI*2);ctx.fill();
-      ctx.beginPath();ctx.ellipse(cx+14,cy+36,7,8,0,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle=whiteCol;
-      ctx.beginPath();ctx.ellipse(cx-14,cy+38,4.5,5,0,0,Math.PI*2);ctx.fill();
-      ctx.beginPath();ctx.ellipse(cx+14,cy+38,4.5,5,0,0,Math.PI*2);ctx.fill();
-    }
-
-    // Head
-    ctx.fillStyle=bodyCol;
-    ctx.beginPath();ctx.arc(cx,cy-14,26,0,Math.PI*2);ctx.fill();
-
-    // Head markings
-    ctx.fillStyle=markCol;
-    ctx.beginPath();ctx.ellipse(cx-6,cy-22,5,8,-.3,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.ellipse(cx+10,cy-20,4,7,.3,0,Math.PI*2);ctx.fill();
-
-    // Ears
-    ctx.fillStyle=bodyCol;
-    ctx.beginPath();ctx.moveTo(cx-16,cy-30);ctx.lineTo(cx-26,cy-48);ctx.lineTo(cx-6,cy-36);ctx.closePath();ctx.fill();
-    ctx.beginPath();ctx.moveTo(cx+16,cy-30);ctx.lineTo(cx+26,cy-48);ctx.lineTo(cx+6,cy-36);ctx.closePath();ctx.fill();
-    // Inner ear
-    ctx.fillStyle=noseCol;ctx.globalAlpha=.4;
-    ctx.beginPath();ctx.moveTo(cx-15,cy-33);ctx.lineTo(cx-23,cy-46);ctx.lineTo(cx-8,cy-37);ctx.closePath();ctx.fill();
-    ctx.beginPath();ctx.moveTo(cx+15,cy-33);ctx.lineTo(cx+23,cy-46);ctx.lineTo(cx+8,cy-37);ctx.closePath();ctx.fill();
-    ctx.globalAlpha=1;
-
-    // Eyes
-    const eyeY=cy-14;
-    if(petState.blinking){
-      ctx.strokeStyle=isDark?"#3A2818":"#4E2B16";ctx.lineWidth=2;
-      ctx.beginPath();ctx.moveTo(cx-11,eyeY);ctx.lineTo(cx-6,eyeY);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(cx+6,eyeY);ctx.lineTo(cx+11,eyeY);ctx.stroke();
-    } else {
-      // Pupils
-      ctx.fillStyle=isDark?"#2A1810":"#3A2010";
-      ctx.beginPath();ctx.ellipse(cx-8,eyeY,5,6,0,0,Math.PI*2);ctx.fill();
-      ctx.beginPath();ctx.ellipse(cx+8,eyeY,5,6,0,0,Math.PI*2);ctx.fill();
-      // Shine
-      if(petState.happy>2){ctx.fillStyle="#fff";ctx.globalAlpha=.7;}
-      else{ctx.fillStyle="#fff";ctx.globalAlpha=.5;}
-      ctx.beginPath();ctx.arc(cx-6,eyeY-2,1.8,0,Math.PI*2);ctx.fill();
-      ctx.beginPath();ctx.arc(cx+10,eyeY-2,1.8,0,Math.PI*2);ctx.fill();
-      ctx.globalAlpha=1;
-    }
-
-    // Nose
-    ctx.fillStyle=noseCol;
-    ctx.beginPath();ctx.moveTo(cx,cy-6);ctx.lineTo(cx-3,cy-2);ctx.lineTo(cx+3,cy-2);ctx.closePath();ctx.fill();
-    // Mouth
-    ctx.strokeStyle=isDark?"#7A5840":"#9A6850";ctx.lineWidth=1.5;ctx.lineCap="round";
-    const smile=petState.happy>4?0.6:petState.happy>1?0.3:0;
-    ctx.beginPath();ctx.moveTo(cx,cy-2);ctx.quadraticCurveTo(cx-5,cy+1+smile,cx-7,cy+2);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(cx,cy-2);ctx.quadraticCurveTo(cx+5,cy+1+smile,cx+7,cy+2);ctx.stroke();
-
-    // Whiskers
-    ctx.strokeStyle=isDark?"#C8B8A0":"#8A7060";ctx.lineWidth=1;ctx.globalAlpha=.7;
-    [[-1,-1],[-1,0],[-1,1],[1,-1],[1,0],[1,1]].forEach(([sx,sy],i)=>{
-      const wx=i<3?-1:1;
-      ctx.beginPath();ctx.moveTo(cx+sx*4,cy-2);ctx.lineTo(cx+wx*32,cy-2+sy*5);ctx.stroke();
-    });
-    ctx.globalAlpha=1;
-
-    // Happy sparkles
-    if(petState.happy>5){
-      const t=Date.now()/400;
-      [[cx-32,cy-40],[cx+32,cy-38],[cx,cy-52]].forEach(([hx,hy],i)=>{
-        const a=Math.abs(Math.sin(t+i));
-        ctx.globalAlpha=a*0.8;ctx.fillStyle="#E8C87A";
-        ctx.font="12px serif";ctx.fillText("✦",hx-4,hy);
-      });
-      ctx.globalAlpha=1;
-    }
-  }
-  frame();
-}
 
 // ── STEAM ─────────────────────────────────────────────
 let steamParts=[];
