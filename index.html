@@ -311,6 +311,10 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .form-btns{display:flex;gap:10px;padding-top:4px;}
 .form-btns button{flex:1;padding:11px;border-radius:30px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
 .btn-save{background:var(--accent);color:#fffdf9;border:none;}
+.dark .btn-save{
+    color: #2E2218;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
 .btn-save:hover{opacity:.88;}
 .btn-cancel{background:transparent;color:var(--muted);border:1px solid var(--border);}
 .btn-cancel:hover{background:var(--soft);}
@@ -727,7 +731,7 @@ function wishModalHTML(){
   const f=wishForm;
   const pOpts=["high","medium","low"].map(p=>`<option value="${p}"${f.priority===p?" selected":""}>${p.charAt(0).toUpperCase()+p.slice(1)}</option>`).join("");
   return`<div class="wish-overlay" onclick="closeWishForm()"><div class="wish-modal" onclick="event.stopPropagation()">
-    <h2>${wishEditId?"Edit Order":"Add Café Order"}</h2>
+    <h2>${wishEditId?"Edit Book Details":"Add Book Details"}</h2>
     <div class="wish-form">
       <div class="wish-field"><label>Book Title</label><input type="text" placeholder="Title" value="${esc(f.title||"")}" id="wf_title"></div>
       <div class="wish-field"><label>Author</label><input type="text" placeholder="Author" value="${esc(f.author||"")}" id="wf_author"></div>
@@ -735,7 +739,7 @@ function wishModalHTML(){
       <div class="wish-field"><label>Priority</label><select id="wf_priority">${pOpts}</select></div>
       <div class="wish-field"><label>Notes</label><input type="text" placeholder="Where to buy, edition, etc." value="${esc(f.notes||"")}" id="wf_notes"></div>
       <div class="wish-btns">
-        <button class="btn-save" onclick="saveWish()">${wishEditId?"Save":"Add to Board"}</button>
+        <button class="btn-save" onclick="saveWish()">${wishEditId?"Save":"Add to Wishlist"}</button>
         <button class="btn-cancel" onclick="closeWishForm()">Cancel</button>
       </div>
     </div>
@@ -763,16 +767,17 @@ function orderBoardHTML(){
   const bought=wishlist.filter(w=>w.bought).length;
   const prioLabel={high:"🔥 High",medium:"☕ Medium",low:"🍃 Low"};
   return`<div class="order-board">
-    <div class="order-board-head"><h3>Café Order Board</h3></div>
-    <p class="order-board-sub">Books waiting to find a home on your shelf.</p>
+    <div class="order-board-head"><h3>Book Wishlist </h3></div>
+    <p class="order-board-sub">Every great library begins with a wish.</p>
     <div class="order-summary">
-      <div class="order-stat"><span>Waiting</span><strong>${total-bought}</strong></div>
+      <div class="order-stat"><span>Want to Read</span><strong>${total-bought}</strong></div>
       <div class="order-stat"><span>Purchased</span><strong>${bought}</strong></div>
       <div class="order-stat"><span>Total</span><strong>${total}</strong></div>
     </div>
-    <button class="btn-add-order" onclick="openWishAdd()">+ Add Café Order</button>
+    <button class="btn-add-order" onclick="openWishAdd()">+ Add Book</button>
     <div class="order-list">
-      ${total===0?`<p style="text-align:center;color:var(--muted);font-style:italic;font-size:13px;padding:20px 0">No orders yet. Add books you want to read next!</p>`
+      ${total===0?`<p style="text-align:center;color:var(--muted);font-style:italic;font-size:13px;padding:20px 0"> No books on your wishlist yet.
+Start adding the stories you can't wait to discover.</p>`
       :wishlist.sort((a,b)=>({high:0,medium:1,low:2}[a.priority]||1)-({high:0,medium:1,low:2}[b.priority]||1)).map(w=>`
         <div class="order-item${w.bought?" bought":""}">
           <div class="order-check${w.bought?" done":""}" onclick="toggleWishBought('${w.id}')">${w.bought?"✓":""}</div>
