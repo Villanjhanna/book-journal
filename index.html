@@ -466,8 +466,20 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .stat:nth-child(3){border-right:none;}
   .stat-num{font-size:22px;}
   .stat-mocha{grid-column:1/-1;border-right:none;border-top:1px dashed var(--border);padding:12px 14px;}
-  .tabs{gap:2px;margin-top:16px;}
-  .tab{padding:9px 13px;font-size:12px;}
+ .tabs{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:3px;
+    margin-top:16px;
+}
+
+.tab{
+    flex:1;
+    padding:8px 4px;
+    font-size:10px;
+    white-space:nowrap;
+    text-align:center;
+}
   .content{padding:16px;border-radius:0 10px 10px 10px;}
   .book-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:36px 16px;}
   .book-cover{height:170px;}
@@ -866,7 +878,7 @@ function mochaRecHTML(){
 
 // ── HTML BUILDERS ──
 function headerHTML(){
-  const icon=dark?"☀":"🌙",label=dark?"Light":"Dark";
+  const icon=dark?"☀":"⏾",label=dark?"Light":"Dark";
   return`<header><div class="wrap"><div class="header-card"><div class="header-inner"><div class="brand"><h1>Book Café <span class="steam-wrap"><canvas id="steamCanvas"></canvas>☕</span></h1><p>Your quiet nook for books, warm thoughts, and lattes</p></div><div class="header-controls"><button class="toggle-dark" onclick="toggleDark()"><span class="toggle-dark-icon">${icon}</span> ${label}</button><button class="btn-add" onclick="openAdd()">+ Add Book</button></div></div></div></div></header>`;
 }
 
@@ -879,7 +891,7 @@ function statsBarHTML(){
 }
 
 function tabsHTML(){
-  return`<div class="wrap"><div class="tabs">${[["dashboard","The Café"],["library","Bookshelf"],["favorites","Favourite Reads"],["bingo","Bingo Cards"],["goals","Goals"]].map(([k,l])=>`<button class="tab${tab===k?" active":""}" onclick="setTab('${k}')">${l}</button>`).join("")}</div></div>`;
+  return`<div class="wrap"><div class="tabs">${[["dashboard","Home"],["library","Bookshelf"],["favorites","Favorites"],["bingo","Bingo"],["goals","Goals"]].map(([k,l])=>`<button class="tab${tab===k?" active":""}" onclick="setTab('${k}')">${l}</button>`).join("")}</div></div>`;
 }
 
 function currentlyReadingHTML(){
