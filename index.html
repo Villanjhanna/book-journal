@@ -480,16 +480,30 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
     white-space:nowrap;
     text-align:center;
 }
-  .bingo-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:6px;
-}
+.bingo-overlay{
+        padding:12px;
+    }
 
-.bingo-cell{
-    aspect-ratio:1;
-    width:100%;
-}
+    .bingo-modal{
+        max-width:100%;
+        padding:18px 16px;
+        border-radius:14px;
+    }
+
+    .bingo-header-cell{
+        font-size:16px;
+        padding:8px 2px;
+    }
+
+    .bingo-cell{
+        font-size:7px;
+        padding:3px;
+        line-height:1.15;
+    }
+
+    .bingo-cell.bingo-free{
+        font-size:18px;
+    }
   .content{padding:16px;border-radius:0 0 10px 10px;}
   .book-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:36px 16px;}
   .book-cover{height:170px;}
