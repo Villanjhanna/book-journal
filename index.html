@@ -11,21 +11,16 @@
   --accent:#8C6239;
   --accent-light:#C6A686; --coffee:#4A3319; --txt:#2E2010; --muted:#7D6B5D;
   --border:rgba(200,180,158,0.55); --shelf:#704F2F;
---surface:#FCF8F2;
-    --soft:#F6EFE6;  --overlay:rgba(235,218,198,0.52); --sl:#fff3cc;
-  --glass:rgba(248,242,234,0.62);
-  --glass-border:rgba(210,192,168,0.50);
+  --surface:#FCF8F2; --soft:#F6EFE6; --overlay:rgba(235,218,198,0.52); --sl:#fff3cc;
+  --glass:rgba(248,242,234,0.62); --glass-border:rgba(210,192,168,0.50); --faint:#BFAEA0;
 }
 .dark {
-  --bg:rgba(18,11,7,0.60);
-    --surface:#1F1712;
-  --accent:#EAD2AC;
-  --accent-light:#D4A373; --txt:#F4EBE1; --muted:#A69180;
+  --bg:rgba(18,11,7,0.60); --surface:#1F1712;
+  --accent:#EAD2AC; --accent-light:#D4A373; --txt:#F4EBE1; --muted:#A69180;
   --border:rgba(70,50,34,0.55); --shelf:#423021;
   --soft:rgba(36,25,16,0.55); --faint:#544133;
   --overlay:rgba(10,6,3,0.72); --sl:#ffeaa7;
-  --glass:rgba(30,20,13,0.68);
-  --glass-border:rgba(70,50,34,0.50);
+  --glass:rgba(30,20,13,0.68); --glass-border:rgba(70,50,34,0.50);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--txt);font-family:'Cabin',sans-serif;font-weight:400;min-height:100vh;transition:background .3s,color .3s;overflow-x:hidden;padding-bottom:100px;}
@@ -34,11 +29,7 @@ input,select,textarea{font-family:inherit;}
 .wrap{max-width:1020px;margin:0 auto;padding:0 32px;position:relative;z-index:10;}
 
 /* ── BACKGROUND ── */
-.cafe-bg{
-    position:fixed;inset:0;pointer-events:none;z-index:1;
-    background-image:url('https://giffiles.alphacoders.com/211/211265.gif');
-    background-size:cover;background-position:center;filter:brightness(.75);
-}
+.cafe-bg{position:fixed;inset:0;pointer-events:none;z-index:1;background-image:url('https://giffiles.alphacoders.com/211/211265.gif');background-size:cover;background-position:center;filter:brightness(.75);}
 .cafe-bg::after{content:"";position:absolute;inset:0;background:var(--overlay);transition:background .3s;z-index:2;}
 .string-lights{position:absolute;top:0;left:0;width:100%;height:18px;
   background:radial-gradient(circle at 10% 0,var(--sl) 4px,transparent 6px),
@@ -63,59 +54,62 @@ input,select,textarea{font-family:inherit;}
 .letter-btn{background:#8C6239;color:#fff;border:none;border-radius:30px;padding:12px 28px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:16px;transition:background .2s;}
 .letter-btn:hover{background:#4A3319;}
 
+/* ── TUTORIAL OVERLAY ── */
+.tutorial-overlay{position:fixed;inset:0;z-index:400;pointer-events:none;}
+.tutorial-backdrop{position:absolute;inset:0;background:rgba(20,12,6,0.72);pointer-events:all;}
+.tutorial-spotlight{position:absolute;border-radius:14px;box-shadow:0 0 0 9999px rgba(20,12,6,0.72);pointer-events:none;transition:all .35s cubic-bezier(.4,0,.2,1);}
+.tutorial-card{
+  position:absolute;
+  background:var(--surface,#FCF8F2);
+  border:1px solid rgba(200,178,150,0.5);
+  border-radius:16px;
+  padding:22px 24px 18px;
+  max-width:320px;
+  width:90vw;
+  box-shadow:0 12px 40px rgba(0,0,0,0.22);
+  pointer-events:all;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  z-index:401;
+}
+.tutorial-step-badge{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent,#8C6239);margin-bottom:8px;opacity:.8;}
+.tutorial-card h3{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--accent,#8C6239);margin-bottom:8px;line-height:1.3;}
+.tutorial-card p{font-size:13px;color:var(--muted,#7D6B5D);line-height:1.65;margin-bottom:16px;}
+.tutorial-card p strong{color:var(--txt,#2E2010);font-weight:600;}
+.tutorial-emoji{font-size:28px;margin-bottom:10px;display:block;}
+.tutorial-btns{display:flex;gap:8px;align-items:center;justify-content:space-between;}
+.tutorial-dots{display:flex;gap:5px;}
+.tutorial-dot{width:7px;height:7px;border-radius:50%;background:var(--border,rgba(200,180,158,0.55));transition:background .2s;}
+.tutorial-dot.active{background:var(--accent,#8C6239);}
+.tutorial-next{background:var(--accent,#8C6239);color:#fff;border:none;border-radius:24px;padding:9px 20px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;transition:opacity .2s;}
+.tutorial-next:hover{opacity:.85;}
+.tutorial-skip{background:none;border:none;font-size:11px;color:var(--muted,#7D6B5D);letter-spacing:.5px;text-transform:uppercase;padding:4px 8px;border-radius:6px;}
+.tutorial-skip:hover{color:var(--accent,#8C6239);}
+.tutorial-arrow{position:absolute;width:14px;height:14px;background:var(--surface,#FCF8F2);border:1px solid rgba(200,178,150,0.5);}
+.tutorial-arrow.top{top:-7px;left:50%;transform:translateX(-50%) rotate(45deg);border-bottom:none;border-right:none;}
+.tutorial-arrow.bottom{bottom:-7px;left:50%;transform:translateX(-50%) rotate(45deg);border-top:none;border-left:none;}
+.tutorial-arrow.left{left:-7px;top:50%;transform:translateY(-50%) rotate(45deg);border-top:none;border-right:none;}
+.tutorial-arrow.right{right:-7px;top:50%;transform:translateY(-50%) rotate(45deg);border-bottom:none;border-left:none;}
+
 /* ── HEADER ── */
 header{padding:28px 0 0;position:relative;}
-.header-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:0 6px 18px rgba(74,51,25,.08);
-  padding:22px 28px 20px;
-  margin-bottom:12px;
-}
-.dark .header-card{
-  background:var(--surface);
-  border-color:var(--border);
-}
+.header-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:0 6px 18px rgba(74,51,25,.08);padding:22px 28px 20px;margin-bottom:12px;}
+.dark .header-card{background:var(--surface);border-color:var(--border);}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
 .brand h1{font-family:'Lora',serif;font-size:30px;font-weight:700;color:var(--accent);letter-spacing:-.5px;display:flex;align-items:center;gap:10px;}
 .brand p{font-size:14px;color:var(--muted);margin-top:4px;font-style:italic;font-family:'Lora',serif;}
 .steam-wrap{position:relative;width:34px;height:34px;display:inline-block;}
 #steamCanvas{position:absolute;top:-26px;left:-4px;width:42px;height:32px;pointer-events:none;}
 .header-controls{display:flex;align-items:center;gap:12px;flex-shrink:0;}
-
-/* ── DARK TOGGLE PILL ── */
-.toggle-dark{
-  display:flex;align-items:center;gap:7px;
-  background:var(--soft);
-  border:1px solid var(--border);
-  border-radius:30px;
-  padding:8px 16px;
-  font-size:12px;font-weight:600;
-  color:var(--muted);
-  letter-spacing:.6px;text-transform:uppercase;
-  transition:all .2s;
-}
+.toggle-dark{display:flex;align-items:center;gap:7px;background:var(--soft);border:1px solid var(--border);border-radius:30px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;transition:all .2s;}
 .toggle-dark:hover{color:var(--accent);border-color:var(--accent-light);}
 .toggle-dark-icon{font-size:14px;line-height:1;}
-
 .btn-add{background:var(--accent);color:#FFFDF9;border:none;border-radius:30px;padding:10px 20px;font-size:13px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;transition:all .2s;box-shadow:0 4px 10px rgba(140,98,57,.18);white-space:nowrap;}
-
-.dark .btn-add{
-    color: #2E2218;
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-}.btn-add:hover{opacity:.88;transform:translateY(-1px);}
+.dark .btn-add{color:#2E2218;box-shadow:0 4px 12px rgba(0,0,0,.25);}
+.btn-add:hover{opacity:.88;transform:translateY(-1px);}
 
 /* ── STATS BAR ── */
-.stats-row{
-    display:flex;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-top:none;
-}
-.dark .stats-row{
-    background:var(--surface);
-}
+.stats-row{display:flex;background:var(--surface);border:1px solid var(--border);border-top:none;}
+.dark .stats-row{background:var(--surface);}
 .stat{flex:1;padding:18px 8px;text-align:center;border-right:1px dashed var(--border);min-width:0;}
 .stat:last-child{border-right:none;}
 .stat-num{font-family:'Lora',serif;font-size:26px;font-weight:700;color:var(--accent);}
@@ -124,47 +118,21 @@ header{padding:28px 0 0;position:relative;}
 /* ── TABS ── */
 .tabs{display:flex;gap:4px;margin:24px 0 0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .tabs::-webkit-scrollbar{display:none;}
-.tab{    background:var(--surface);
-border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-size:14px;color:var(--muted);transition:all .2s;white-space:nowrap;flex-shrink:0;}
-.tab.active{
-    background: var(--accent);
-    color: #FFFDF9;
-    border: 1px solid var(--accent);
-    border-bottom-color: var(--accent);
-    font-weight: 600;
-    margin-bottom: -1px;
-    z-index: 2;
-}
-.dark .tab.active{
-    background:var(--surface);
-}
+.tab{background:var(--surface);border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-size:14px;color:var(--muted);transition:all .2s;white-space:nowrap;flex-shrink:0;}
+.tab.active{background:var(--accent);color:#FFFDF9;border:1px solid var(--accent);border-bottom-color:var(--accent);font-weight:600;margin-bottom:-1px;z-index:2;}
+.dark .tab.active{background:var(--surface);color:var(--accent);}
 .tab:hover:not(.active){color:var(--accent);background:var(--soft);}
 
 /* ── CONTENT PANEL ── */
-.content{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:0 12px 12px 12px;
-    padding:28px;
-}
-.dark .content{
-    background:var(--surface);
-}
+.content{background:var(--surface);border:1px solid var(--border);border-radius:0 12px 12px 12px;padding:28px;}
 
 /* ── DASHBOARD ── */
-.dash-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    margin-bottom:20px;
-    align-items:start;
-}
-/* Currently Reading card */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;align-items:start;}
 .currently-reading{background:var(--surface);border:1px solid rgba(200,178,150,0.40);border-radius:12px;padding:22px;display:flex;gap:18px;align-items:flex-start;}
 .dark .currently-reading{background:var(--surface);border-color:rgba(70,50,34,0.40);}
 .cr-label{font-size:10px;font-weight:600;color:var(--accent);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
 .cr-label::before{content:"";width:8px;height:8px;border-radius:50%;background:#C29043;display:inline-block;}
-.cr-cover{width:80px;height:116px;border-radius:3px 8px 8px 3px;object-fit:cover;flex-shrink:0;box-shadow:-3px 4px 10px rgba(0,0,0,.18),-1px 0 0 rgba(0,0,0,.15) inset;overflow:hidden;background:var(--soft);display:flex;align-items:center;justify-content:center;}
+.cr-cover{width:80px;height:116px;border-radius:3px 8px 8px 3px;flex-shrink:0;box-shadow:-3px 4px 10px rgba(0,0,0,.18),-1px 0 0 rgba(0,0,0,.15) inset;overflow:hidden;background:var(--soft);display:flex;align-items:center;justify-content:center;}
 .cr-cover img{width:100%;height:100%;object-fit:cover;}
 .cr-cover-placeholder{font-family:'Lora',serif;font-size:9px;font-style:italic;color:var(--muted);text-align:center;padding:8px;}
 .cr-info{flex:1;min-width:0;}
@@ -175,11 +143,9 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .cr-progress-fill{background:var(--accent);height:100%;border-radius:99px;transition:width .5s;}
 .cr-progress-label{font-size:11px;color:var(--muted);}
 .cr-none{font-family:'Lora',serif;font-size:14px;font-style:italic;color:var(--accent);text-align:center;padding:24px 0;}
-
-/* Reading Goal card */
 .goal-card-dash{background:var(--surface);border:1px solid rgba(200,178,150,0.40);border-radius:12px;padding:22px;}
 .dark .goal-card-dash{background:var(--surface);border-color:rgba(70,50,34,0.40);}
-.goal-card-dash h3{font-family:'Lora',serif;font-size:14px;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+.goal-card-dash h3{font-family:'Lora',serif;font-size:14px;color:var(--accent);margin-bottom:16px;}
 .goal-big{font-family:'Lora',serif;font-size:28px;font-weight:700;color:var(--txt);margin-bottom:4px;}
 .goal-big span{font-size:16px;color:var(--muted);font-weight:400;}
 .goal-input-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
@@ -188,28 +154,21 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .goal-track{background:var(--border);border-radius:10px;height:8px;overflow:hidden;margin-bottom:8px;}
 .goal-fill{background:var(--accent);height:100%;border-radius:10px;transition:width .5s;}
 .goal-note{font-family:'Lora',serif;font-size:12px;color:var(--muted);font-style:italic;}
-
-/* Stats mini-grid */
 .stats-mini{background:var(--surface);border:1px solid rgba(200,178,150,0.40);border-radius:12px;padding:22px;}
 .dark .stats-mini{background:var(--surface);border-color:rgba(70,50,34,0.40);}
-.stats-mini h3{font-family:'Lora',serif;font-size:14px;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+.stats-mini h3{font-family:'Lora',serif;font-size:14px;color:var(--accent);margin-bottom:16px;}
 .stats-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.stat-mini-item{    background:var(--soft);border-radius:8px;padding:12px;border:1px solid rgba(200,178,150,0.35);}
+.stat-mini-item{background:var(--soft);border-radius:8px;padding:12px;border:1px solid rgba(200,178,150,0.35);}
 .dark .stat-mini-item{background:rgba(40,26,15,0.45);border-color:rgba(70,50,34,0.35);}
 .stat-mini-num{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--accent);}
 .stat-mini-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px;}
-
-/* Mood Café */
 .mood-card{background:var(--surface);border:1px solid rgba(200,178,150,0.40);border-radius:12px;padding:22px;display:flex;flex-direction:column;align-items:center;text-align:center;}
 .dark .mood-card{background:var(--surface);border-color:rgba(70,50,34,0.40);}
 .mood-card h3{font-family:'Lora',serif;font-size:14px;color:var(--accent);margin-bottom:6px;align-self:flex-start;}
 .mood-card p{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:12px;align-self:flex-start;}
-#petCanvas{border-radius:10px;cursor:pointer;display:block;}
 .pet-btn{background:none;border:1px solid var(--border);border-radius:20px;padding:7px 16px;font-size:12px;color:var(--accent);font-weight:600;margin-top:10px;transition:all .2s;letter-spacing:.3px;}
 .pet-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .pet-hearts{font-size:14px;min-height:22px;margin-top:2px;color:#E0778A;letter-spacing:2px;}
-
-/* Recently Read row */
 .recently-read{margin-top:4px;}
 .recently-read h3{font-family:'Lora',serif;font-size:16px;color:var(--accent);margin-bottom:16px;}
 .recent-row{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;}
@@ -220,12 +179,10 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .recent-placeholder{font-family:'Lora',serif;font-size:9px;color:var(--muted);font-style:italic;text-align:center;padding:8px;line-height:1.4;}
 .recent-book-title{font-family:'Lora',serif;font-size:10px;font-weight:700;color:var(--txt);margin-top:7px;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
 .recent-book-stars{font-size:10px;color:#D4AF37;margin-top:2px;letter-spacing:.5px;}
-
-/* Quote footer strip */
 .quote-strip{margin-top:20px;padding:16px 20px;border-top:1px dashed var(--border);font-family:'Lora',serif;font-size:13px;font-style:italic;color:var(--muted);display:flex;align-items:center;gap:10px;}
 .quote-strip::before{content:'"';font-size:24px;color:var(--accent-light);line-height:1;}
 
-/* ── FULL LIBRARY TAB ── */
+/* ── LIBRARY ── */
 .toolbar{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;align-items:center;}
 .search-wrap{position:relative;flex:1;min-width:160px;}
 .search-wrap input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:30px;padding:10px 16px 10px 38px;font-size:13px;color:var(--txt);outline:none;transition:all .15s;}
@@ -250,12 +207,9 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .book-genres{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:5px;}
 .genre-pill{font-size:9px;font-weight:500;color:var(--accent);background:var(--bg);padding:2px 7px;border-radius:4px;border:1px solid var(--border);text-transform:uppercase;}
 .book-date{font-size:10px;color:var(--muted);font-style:italic;}
-.card-div{display:none;}
 .empty{text-align:center;padding:72px 0;color:var(--muted);}
 .empty-title{font-family:'Lora',serif;font-size:22px;font-style:italic;margin-bottom:10px;color:var(--accent);}
 .empty-sub{font-size:13px;}
-
-/* ── FAVORITES TAB ── */
 .favs-intro{font-family:'Lora',serif;font-size:15px;color:var(--muted);font-style:italic;margin-bottom:24px;border-left:3px solid var(--accent-light);padding-left:12px;}
 
 /* ── STATS TAB ── */
@@ -304,17 +258,14 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .form-field textarea{resize:vertical;line-height:1.6;}
 .form-half{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .genre-tags{display:flex;flex-wrap:wrap;gap:6px;}
-.genre-tag{border-radius:99px;padding:5px 13px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s;letter-spacing:.2px;}
+.genre-tag{border-radius:99px;padding:5px 13px;font-size:11px;border:1px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15px;letter-spacing:.2px;}
 .genre-tag.sel{background:var(--accent);color:#fffdf9;border-color:var(--accent);}
 .fav-label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;}
 .fav-label input{accent-color:var(--accent);width:15px;height:15px;}
 .form-btns{display:flex;gap:10px;padding-top:4px;}
 .form-btns button{flex:1;padding:11px;border-radius:30px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
 .btn-save{background:var(--accent);color:#fffdf9;border:none;}
-.dark .btn-save{
-    color: #2E2218;
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-}
+.dark .btn-save{color:#2E2218;box-shadow:0 4px 12px rgba(0,0,0,.25);}
 .btn-save:hover{opacity:.88;}
 .btn-cancel{background:transparent;color:var(--muted);border:1px solid var(--border);}
 .btn-cancel:hover{background:var(--soft);}
@@ -361,7 +312,7 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .bingo-badge:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .bingo-badge.has-bingo{background:var(--accent);color:#fff;border-color:var(--accent);}
 .bingo-tab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
-.bingo-list-card{background:var(--card-light,var(--surface));border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:all .2s;}
+.bingo-list-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:all .2s;}
 .bingo-list-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.09);transform:translateY(-2px);}
 .bingo-list-title{font-family:'Lora',serif;font-size:14px;font-weight:700;color:var(--txt);margin-bottom:2px;}
 .bingo-list-author{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:10px;}
@@ -374,7 +325,7 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .bingo-empty{text-align:center;padding:60px 0;color:var(--muted);}
 .bingo-empty-title{font-family:'Lora',serif;font-size:20px;font-style:italic;margin-bottom:8px;color:var(--accent);}
 
-/* ── CAFÉ ORDER BOARD (Wishlist) ── */
+/* ── WISHLIST ── */
 .order-board{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:26px;margin-top:20px;margin-bottom:24px;}
 .order-board-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
 .order-board-head h3{font-family:'Lora',serif;font-size:18px;color:var(--accent);}
@@ -384,10 +335,7 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .order-stat span{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;}
 .order-stat strong{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--accent);}
 .btn-add-order{width:100%;margin-bottom:16px;padding:11px;border:none;border-radius:30px;background:var(--accent);color:#fffdf9;font-size:13px;font-weight:600;letter-spacing:.4px;cursor:pointer;transition:opacity .2s;}
-.dark .btn-add-order{
-    color: #2E2218;
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-}
+.dark .btn-add-order{color:#2E2218;box-shadow:0 4px 12px rgba(0,0,0,.25);}
 .btn-add-order:hover{opacity:.88;}
 .order-list{display:flex;flex-direction:column;gap:10px;}
 .order-item{display:flex;align-items:center;gap:14px;background:var(--surface);border-radius:12px;padding:14px 16px;border:1px solid var(--border);transition:all .2s;}
@@ -407,23 +355,19 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .order-priority.low{background:#5A8A5A;}
 .order-del{background:none;border:none;color:var(--faint);font-size:16px;cursor:pointer;padding:0 4px;flex-shrink:0;transition:color .15s;line-height:1;}
 .order-del:hover{color:#b84141;}
-/* Wish modal */
 .wish-overlay{position:fixed;inset:0;background:rgba(30,20,15,.5);z-index:210;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
 .wish-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;width:100%;max-width:460px;box-shadow:0 20px 50px rgba(46,34,24,.18);}
 .wish-modal h2{font-family:'Lora',serif;font-size:20px;color:var(--accent);margin-bottom:20px;}
 .wish-form{display:grid;gap:13px;}
 .wish-field{display:flex;flex-direction:column;gap:5px;}
 .wish-field label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;}
-.wish-field input,.wish-field select,.wish-field textarea{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--txt);outline:none;}
+.wish-field input,.wish-field select{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--txt);outline:none;}
 .wish-field input:focus,.wish-field select:focus{border-color:var(--accent);}
 .wish-btns{display:flex;gap:10px;padding-top:4px;}
 .wish-btns button{flex:1;padding:10px;border-radius:30px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
 
-/* ── MOCHA STAT CARD ── */
-.stat-mocha{
-  flex:1.6;padding:14px 12px;text-align:left;border-right:1px dashed var(--border);
-  cursor:pointer;transition:background .2s;display:flex;align-items:center;gap:10px;min-width:0;
-}
+/* ── MOCHA STAT ── */
+.stat-mocha{flex:1.6;padding:14px 12px;text-align:left;border-right:1px dashed var(--border);cursor:pointer;transition:background .2s;display:flex;align-items:center;gap:10px;min-width:0;}
 .stat-mocha:hover{background:var(--soft);}
 .stat-mocha img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border);background:#fff;}
 .stat-mocha-info{flex:1;min-width:0;}
@@ -432,7 +376,7 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .mocha-stat-author{font-size:10px;color:var(--muted);font-style:italic;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .mocha-stat-none{font-family:'Lora',serif;font-size:11px;color:var(--faint);font-style:italic;}
 
-/* ── MOCHA REC POPUP ── */
+/* ── REC POPUP ── */
 .rec-overlay{position:fixed;inset:0;background:rgba(30,20,15,.45);z-index:220;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
 .rec-modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:32px 28px;width:100%;max-width:390px;box-shadow:0 20px 50px rgba(46,34,24,.2);text-align:center;position:relative;}
 .rec-pusheen{display:block;width:90px;height:auto;margin:0 auto 14px;}
@@ -446,13 +390,11 @@ border:1px solid transparent;border-radius:12px 12px 0 0;padding:10px 18px;font-
 .rec-message{font-family:'Lora',serif;font-size:12px;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:20px;padding:11px 13px;background:var(--soft);border-radius:8px;border-left:3px solid var(--accent-light);}
 .rec-actions{display:flex;gap:10px;justify-content:center;}
 .rec-btn-start{background:var(--accent);color:#fffdf9;border:none;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s;letter-spacing:.3px;}
-.dark .rec-btn-start{
-    color: #2E2218;
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-}
+.dark .rec-btn-start{color:#2E2218;}
 .rec-btn-start:hover{opacity:.88;}
 .rec-btn-pick{background:transparent;color:var(--accent);border:1.5px solid var(--accent);border-radius:30px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
 .rec-btn-pick:hover{background:var(--soft);}
+
 
 footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed var(--border);font-family:'Lora',serif;font-size:13px;font-style:italic;color:var(--muted);}
 
@@ -463,7 +405,6 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .wrap{padding:0 16px;}
 }
 @media(max-width:580px){
-  /* Header */
   header{padding:16px 0 0;}
   .header-card{padding:16px 18px 14px;border-radius:14px;}
   .header-inner{gap:12px;}
@@ -472,38 +413,20 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .header-controls{gap:8px;width:100%;justify-content:flex-end;}
   .toggle-dark{padding:7px 12px;font-size:11px;}
   .btn-add{padding:9px 14px;font-size:12px;}
-
-  /* Stats bar — 2x2 grid + mocha full width */
   .stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;flex-wrap:wrap;}
   .stat{border-right:1px dashed var(--border);border-bottom:none;padding:14px 6px;}
   .stat:nth-child(3){border-right:none;}
   .stat-num{font-size:22px;}
-  .stat-mocha{
-    grid-column:1/-1;
-    border-right:none;
-    border-top:1px dashed var(--border);
-    padding:12px 14px;
-  }
-
-  /* Tabs scrollable */
+  .stat-mocha{grid-column:1/-1;border-right:none;border-top:1px dashed var(--border);padding:12px 14px;}
   .tabs{gap:2px;margin-top:16px;}
   .tab{padding:9px 13px;font-size:12px;}
-
-  /* Content */
   .content{padding:16px;border-radius:0 10px 10px 10px;}
-
-  /* Book grid smaller */
   .book-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:36px 16px;}
   .book-cover{height:170px;}
-
-  /* Bingo tab */
   .bingo-tab-grid{grid-template-columns:1fr;}
-
-  /* Order board */
   .order-summary{grid-template-columns:1fr 1fr 1fr;}
-
-  /* Charts */
   .charts-grid{grid-template-columns:1fr;}
+  .tutorial-card{max-width:calc(100vw - 32px);}
 }
 @media(max-width:400px){
   .stats-row{grid-template-columns:1fr 1fr;}
@@ -511,35 +434,48 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .stat:nth-child(3){border-top:1px dashed var(--border);border-right:1px dashed var(--border);}
   .stat-mocha{grid-column:1/-1;}
 }
-
-@keyframes petGlow{from{opacity:.4}to{opacity:1}}
 .pet-photo-wrap{position:relative;display:inline-block;cursor:pointer;}
 .pet-photo-wrap img{width:160px;height:160px;object-fit:cover;border-radius:12px;display:block;transition:transform .2s;}
 .pet-photo-wrap:hover img{transform:scale(1.02);}
 </style>
 </head>
 <body>
-
 <div class="cafe-bg"><div class="string-lights"></div></div>
 
-<!-- Gift Overlay -->
+<!-- Gift Overlay (shown only on very first visit ever) -->
 <div class="gift-overlay" id="giftOverlay">
   <div class="envelope" id="envelopeEl" onclick="openEnvelope()">
     <div class="envelope-seal">❦</div>
     <h2>A little something for you...</h2>
-    <p>Click to see</p>
+    <p>Click to open</p>
   </div>
   <div class="letter" id="letterEl">
     <div class="letter-text">
       <p>Welcome to the Book Café!</p>
-<p>This little corner was made for readers who love collecting stories, remembering favorites, and discovering their next adventure.</p>
-<p>Pusheen is always nearby to greet you, recommend a book, and enjoy a cozy afternoon together.</p>
-<p>Find a comfy seat, pour yourself a warm drink, and enjoy your stay.</p>
-<p>Enjoy your stay,</p>
-<p style="font-weight:600;margin-bottom:32px;">— Your Café Keeper ♡</p>
+      <p>This little corner was made for readers who love collecting stories, remembering favorites, and discovering their next adventure.</p>
+      <p>Pusheen is always nearby to greet you, recommend a book, and enjoy a cozy afternoon together.</p>
+      <p>Find a comfy seat, pour yourself a warm drink, and enjoy your stay.</p>
+      <p style="font-weight:600;margin-bottom:32px;">— Your Café Keeper ♡</p>
     </div>
     <div style="text-align:center;">
-      <button class="letter-btn" onclick="enterJournal()">Step Into Your Café</button>
+      <button class="letter-btn" onclick="enterCafe()">Step Into Your Café</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tutorial Overlay -->
+<div class="tutorial-overlay" id="tutorialOverlay" style="display:none;">
+  <div class="tutorial-spotlight" id="tutorialSpotlight"></div>
+  <div class="tutorial-card" id="tutorialCard">
+    <div class="tutorial-arrow" id="tutorialArrow"></div>
+    <div class="tutorial-step-badge" id="tutorialBadge">Step 1 of 6</div>
+    <span class="tutorial-emoji" id="tutorialEmoji">☕</span>
+    <h3 id="tutorialTitle">Welcome to your Café</h3>
+    <p id="tutorialBody">Let's take a quick look around so you feel right at home.</p>
+    <div class="tutorial-btns">
+      <button class="tutorial-skip" onclick="endTutorial()">Skip tour</button>
+      <div class="tutorial-dots" id="tutorialDots"></div>
+      <button class="tutorial-next" id="tutorialNextBtn" onclick="tutorialNext()">Next →</button>
     </div>
   </div>
 </div>
@@ -549,61 +485,31 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-// ── CONSTANTS ─────────────────────────────────────────
 const GENRES=["Fantasy","Comedy","Drama","Romance","Mystery","Sci-Fi","Historical","Thriller","Non-Fiction","Fiction","Horror","Biography","Classics","Poetry","Other"];
 const STATUSES=["Unread","Reading","Read"];
-
-// ── BINGO SQUARES ─────────────────────────────────────
-const BINGO_SQUARES = [
-  "Annotated a Page","Favorite Quote","Beautiful Cover","Book Hangover","Cried",
-  "Finished in One Day","Stayed Up Late Reading","Couldn't Put It Down","Made Me Laugh","Plot Twist",
-  "5-Star Read","Recommended It",
-  "Wanted a Sequel","Started Immediately","Comfort Read",
-  "Slow Start","Unexpected Ending","Loved the Main Character","Loved the Villain","Changed My Perspective",
-  "Read with Coffee","Read in the Rain","Bought Because of BookTok","Reread a Chapter","Happy Ending"
-];
-
+const BINGO_SQUARES=["Annotated a Page","Favorite Quote","Beautiful Cover","Book Hangover","Cried","Finished in One Day","Stayed Up Late Reading","Couldn't Put It Down","Made Me Laugh","Plot Twist","5-Star Read","Recommended It","Wanted a Sequel","Started Immediately","Comfort Read","Slow Start","Unexpected Ending","Loved the Main Character","Loved the Villain","Changed My Perspective","Read with Coffee","Read in the Rain","Bought Because of BookTok","Reread a Chapter","Happy Ending"];
 const GCOLS=["#8C6239","#A07855","#6F4E37","#7A5C3E","#B58255","#916F4F","#5C3E26","#C6A686","#4A3319","#A69180"];
 const SC={"Read":"#5B824E","Reading":"#C29043","Unread":"#948475"};
-const QUOTES=[
-  "Between the pages of a book is a lovely place to be.",
-  "A reader lives a thousand lives before he dies.",
-  "Books are a uniquely portable magic.",
-  "There is no friend as loyal as a book.",
-  "One must always be careful of books, for words have the power to change us."
-];
-const READING_NOTES=[
-  "Every page turned is a quiet moment spent just for yourself.",
-  "Your pace is perfect. Savour every word.",
-  "The best time to read is always now.",
-  "Books choose their readers as much as readers choose their books."
-];
+const QUOTES=["Between the pages of a book is a lovely place to be.","A reader lives a thousand lives before he dies.","Books are a uniquely portable magic.","There is no friend as loyal as a book.","One must always be careful of books, for words have the power to change us."];
+const READING_NOTES=["Every page turned is a quiet moment spent just for yourself.","Your pace is perfect. Savour every word.","The best time to read is always now.","Books choose their readers as much as readers choose their books."];
 
-// ── STATE ─────────────────────────────────────────────
 function genId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function stars(n){return n>0?"★".repeat(n)+"☆".repeat(5-n):"";}
 
-const SAMPLE=[
-  {id:genId(),title:"The Seven Husbands of Evelyn Hugo",author:"Taylor Jenkins Reid",status:"Unread",rating:0,genres:["Historical","Romance"],notes:"",dateFinished:"",cover:null,favorite:false,pages:0,pagesRead:0},
-  {id:genId(),title:"Before the Coffee Gets Cold",author:"Toshikazu Kawaguchi",status:"Unread",rating:0,genres:["Fiction","Fantasy"],notes:"",dateFinished:"",cover:null,favorite:false,pages:0,pagesRead:0},
-  {id:genId(),title:"The Last Days of Rabbit Hayes",author:"Anna McPartlin",status:"Unread",rating:0,genres:["Drama","Fiction"],notes:"",dateFinished:"",cover:null,favorite:false,pages:0,pagesRead:0},
-  {id:genId(),title:"The Seven Year Slip",author:"Ashley Poston",status:"Unread",rating:0,genres:["Romance","Fiction"],notes:"",dateFinished:"",cover:null,favorite:false,pages:0,pagesRead:0},
-  {id:genId(),title:"I Will Find You",author:"Harlan Coben",status:"Unread",rating:0,genres:["Mystery","Thriller"],notes:"",dateFinished:"",cover:null,favorite:false,pages:0,pagesRead:0},
-];
-
+// ── STATE ──
 let books=[],goal=24,dark=false,tab="dashboard";
 let search="",fG="All",fS="All";
 let showForm=false,editId=null,form={};
 let ch={};
-let petLevel=0,petHearts="",petTimer=null;
+let petState={happy:0},petTimer=null;
 let showBingo=false,bingoBookId=null;
 let wishlist=[];
 let showWishForm=false,wishEditId=null,wishForm={};
 let mochaRecId=null,showMochaRec=false;
 
 function load(){
-  try{books=JSON.parse(localStorage.getItem("bj_b"))||SAMPLE;}catch{books=[...SAMPLE];}
+  try{books=JSON.parse(localStorage.getItem("bj_b"))||[];}catch{books=[];}
   try{wishlist=JSON.parse(localStorage.getItem("bj_wish"))||[];}catch{wishlist=[];}
   try{goal=parseInt(localStorage.getItem("bj_g"))||24;}catch{}
   try{dark=localStorage.getItem("bj_d")==="1";}catch{}
@@ -624,131 +530,188 @@ function applyTheme(){
   document.body.className=dark?"dark":"";
 }
 
-// ── GIFT SCREEN ───────────────────────────────────────
+// ── GIFT / LETTER ── (shown only once ever)
 function openEnvelope(){
   document.getElementById("envelopeEl").style.display="none";
   document.getElementById("letterEl").style.display="block";
 }
-function enterJournal(){
+function enterCafe(){
   document.getElementById("giftOverlay").classList.add("hidden");
-  const today=new Date().toISOString().slice(0,10);
-  localStorage.setItem("bj_letter_date",today);
+  localStorage.setItem("bj_visited","1");
+  // Start tutorial after a short delay
+  setTimeout(startTutorial, 500);
 }
 
-// ── DERIVED ───────────────────────────────────────────
+// ── TUTORIAL ──
+const TUTORIAL_STEPS = [
+  {
+    title:"Welcome to your Book Café!",
+    body:"This is your cozy reading corner. Let's take a quick tour so you know where everything lives.",
+    target:null,
+    arrow:null
+  },
+  {
+    title:"Add your first book",
+    body:"Tap <strong>+ Add Book</strong> whenever you want to add a new book to your shelf. You can set its status, rating, genres, and even upload a cover photo.",
+    target:".btn-add",
+    arrow:"top"
+  },
+  {
+    title:"Your tabs",
+    body:"Use the tabs to navigate. <strong>The Café</strong> is your dashboard. <strong>Bookshelf</strong> shows all your books. <strong>Bingo Cards</strong>, <strong>Favourite Reads</strong>, and <strong>Goals</strong> are all waiting for you too.",
+    target:".tabs",
+    arrow:"bottom"
+  },
+  {
+    title:"Meet Pusheen",
+    body:"Click <strong>Pusheen's Pick</strong> in the stats bar anytime to get a random reading recommendation from your unread shelf. Give her a pet on the dashboard too!",
+    target:".stat-mocha",
+    arrow:"top"
+  },
+  {
+    title:"Track your reading goal",
+    body:"Set a yearly reading target and watch your progress grow. Head to the <strong>Goals</strong> tab to also manage your book wishlist.",
+    target:null,
+    arrow:null
+  },
+  {
+    title:"You're all set!",
+    body:"Start by adding a book you're currently reading or one you've recently finished. Your café is waiting — enjoy every page! ♡",
+    target:null,
+    arrow:null
+  }
+];
+
+let tutorialStep = 0;
+
+function startTutorial(){
+  tutorialStep = 0;
+  document.getElementById("tutorialOverlay").style.display = "block";
+  showTutorialStep();
+}
+
+function showTutorialStep(){
+  const step = TUTORIAL_STEPS[tutorialStep];
+  const total = TUTORIAL_STEPS.length;
+  const card = document.getElementById("tutorialCard");
+  const spotlight = document.getElementById("tutorialSpotlight");
+  const overlay = document.getElementById("tutorialOverlay");
+
+  document.getElementById("tutorialBadge").textContent = `Step ${tutorialStep+1} of ${total}`;
+  document.getElementById("tutorialEmoji").textContent = step.emoji;
+  document.getElementById("tutorialTitle").textContent = step.title;
+  document.getElementById("tutorialBody").innerHTML = step.body;
+
+  const isLast = tutorialStep === total - 1;
+  document.getElementById("tutorialNextBtn").textContent = isLast ? "Done ♡" : "Next →";
+
+  // Dots
+  const dots = document.getElementById("tutorialDots");
+  dots.innerHTML = TUTORIAL_STEPS.map((_,i)=>`<div class="tutorial-dot${i===tutorialStep?" active":""}"></div>`).join("");
+
+  // Arrow
+  const arrow = document.getElementById("tutorialArrow");
+  arrow.className = "tutorial-arrow";
+  if(step.arrow) arrow.classList.add(step.arrow);
+  arrow.style.display = step.arrow ? "block" : "none";
+
+  // Spotlight & card positioning
+  if(step.target){
+    const el = document.querySelector(step.target);
+    if(el){
+      const rect = el.getBoundingClientRect();
+      const pad = 8;
+      spotlight.style.cssText = `position:absolute;border-radius:12px;box-shadow:0 0 0 9999px rgba(20,12,6,0.72);pointer-events:none;transition:all .35s cubic-bezier(.4,0,.2,1);top:${rect.top+window.scrollY-pad}px;left:${rect.left-pad}px;width:${rect.width+pad*2}px;height:${rect.height+pad*2}px;`;
+      spotlight.style.display = "block";
+
+      // Position card near target
+      const cw = Math.min(320, window.innerWidth - 32);
+      const margin = 16;
+      let top, left;
+
+      if(step.arrow === "top"){
+        // Card below target
+        top = rect.bottom + window.scrollY + pad + margin;
+        left = Math.max(margin, Math.min(rect.left + rect.width/2 - cw/2, window.innerWidth - cw - margin));
+      } else {
+        // Card above target
+        top = rect.top + window.scrollY - pad - margin - 200;
+        left = Math.max(margin, Math.min(rect.left + rect.width/2 - cw/2, window.innerWidth - cw - margin));
+        if(top < 70) top = rect.bottom + window.scrollY + pad + margin;
+      }
+
+      card.style.top = top + "px";
+      card.style.left = left + "px";
+      card.style.transform = "none";
+      card.style.position = "absolute";
+    } else {
+      centerCard(card, spotlight);
+    }
+  } else {
+    centerCard(card, spotlight);
+  }
+}
+
+function centerCard(card, spotlight){
+  spotlight.style.display = "none";
+  card.style.position = "fixed";
+  card.style.top = "50%";
+  card.style.left = "50%";
+  card.style.transform = "translate(-50%, -50%)";
+}
+
+function tutorialNext(){
+  tutorialStep++;
+  if(tutorialStep >= TUTORIAL_STEPS.length){
+    endTutorial();
+  } else {
+    showTutorialStep();
+  }
+}
+
+function endTutorial(){
+  document.getElementById("tutorialOverlay").style.display = "none";
+  localStorage.setItem("bj_tutorial_done","1");
+}
+
+// ── DERIVED ──
 function readBooks(){return books.filter(b=>b.status==="Read");}
 function avgRating(){const r=readBooks().filter(b=>b.rating>0);return r.length?(r.reduce((s,b)=>s+b.rating,0)/r.length).toFixed(1):"—";}
 function currentBook(){return books.find(b=>b.status==="Reading")||null;}
 function getFiltered(){return books.filter(b=>{const q=search.toLowerCase();return(!q||b.title.toLowerCase().includes(q)||(b.author||"").toLowerCase().includes(q))&&(fG==="All"||b.genres.includes(fG))&&(fS==="All"||b.status===fS);});}
+function getUnread(){return books.filter(b=>b.status==="Unread");}
 
-// ── BINGO HELPERS ─────────────────────────────────────
-function getBingo(b){
-  if(!b.bingo||b.bingo.length!==25){const arr=Array(25).fill(false);arr[12]=true;return arr;}
-  const arr=[...b.bingo];arr[12]=true;return arr;
-}
-function bingoLines(arr){
-  const lines=[];
-  for(let r=0;r<5;r++){const row=[];for(let c=0;c<5;c++)row.push(r*5+c);if(row.every(i=>arr[i]))lines.push(row);}
-  for(let c=0;c<5;c++){const col=[];for(let r=0;r<5;r++)col.push(r*5+c);if(col.every(i=>arr[i]))lines.push(col);}
-  const d1=[0,6,12,18,24],d2=[4,8,12,16,20];
-  if(d1.every(i=>arr[i]))lines.push(d1);
-  if(d2.every(i=>arr[i]))lines.push(d2);
-  return lines;
-}
+// ── BINGO ──
+function getBingo(b){if(!b.bingo||b.bingo.length!==25){const a=Array(25).fill(false);a[12]=true;return a;}const a=[...b.bingo];a[12]=true;return a;}
+function bingoLines(arr){const lines=[];for(let r=0;r<5;r++){const row=[];for(let c=0;c<5;c++)row.push(r*5+c);if(row.every(i=>arr[i]))lines.push(row);}for(let c=0;c<5;c++){const col=[];for(let r=0;r<5;r++)col.push(r*5+c);if(col.every(i=>arr[i]))lines.push(col);}const d1=[0,6,12,18,24],d2=[4,8,12,16,20];if(d1.every(i=>arr[i]))lines.push(d1);if(d2.every(i=>arr[i]))lines.push(d2);return lines;}
 function hasBingo(b){return bingoLines(getBingo(b)).length>0;}
 function checkedCount(b){return getBingo(b).filter((v,i)=>v&&i!==12).length;}
 function openBingo(id){bingoBookId=id;showBingo=true;render();}
 function closeBingo(){showBingo=false;bingoBookId=null;render();}
-function toggleBingoCell(bookId,idx){
-  if(idx===12)return;
-  const b=books.find(x=>x.id===bookId);if(!b)return;
-  const arr=getBingo(b);arr[idx]=!arr[idx];arr[12]=true;
-  b.bingo=arr;save();render();
-}
-function resetBingo(bookId){
-  const b=books.find(x=>x.id===bookId);if(!b)return;
-  b.bingo=Array(25).fill(false);b.bingo[12]=true;save();render();
-}
+function toggleBingoCell(bookId,idx){if(idx===12)return;const b=books.find(x=>x.id===bookId);if(!b)return;const arr=getBingo(b);arr[idx]=!arr[idx];arr[12]=true;b.bingo=arr;save();render();}
+function resetBingo(bookId){const b=books.find(x=>x.id===bookId);if(!b)return;b.bingo=Array(25).fill(false);b.bingo[12]=true;save();render();}
 
 function bingoModalHTML(){
   if(!showBingo||!bingoBookId)return"";
   const b=books.find(x=>x.id===bingoBookId);if(!b)return"";
-  const arr=getBingo(b);
-  const lines=bingoLines(arr);
-  const lineSet=new Set(lines.flat());
-  const bingoCount=lines.length;
-  const checked=checkedCount(b);
-  const cells=BINGO_SQUARES.map((sq,i)=>{
-    if(i===12)return`<div class="bingo-cell bingo-free">★</div>`;
-    const isChecked=arr[i];
-    const isLine=lineSet.has(i);
-    return`<div class="bingo-cell${isChecked?" checked":""}${isLine?" bingo-line":""}" onclick="toggleBingoCell('${b.id}',${i})">${esc(sq)}</div>`;
-  }).join("");
-  return`<div class="bingo-overlay" onclick="closeBingo()">
-    <div class="bingo-modal" onclick="event.stopPropagation()">
-      <div class="bingo-modal-head">
-        <h2>Book Bingo</h2>
-        <button class="bingo-modal-close" onclick="closeBingo()">×</button>
-      </div>
-      <div class="bingo-book-sub">${esc(b.title)}${b.author?" · "+esc(b.author):""}</div>
-      <div class="bingo-instructions">Tap each square that appeared in this book. Complete a row, column, or diagonal to get a Bingo!</div>
-      <div class="bingo-card-wrap">
-        <div class="bingo-header-row">${"BINGO".split("").map(l=>`<div class="bingo-header-cell">${l}</div>`).join("")}</div>
-        <div class="bingo-grid">${cells}</div>
-      </div>
-      <div class="bingo-footer">
-        <div>
-          <div class="bingo-score">${checked} / 24 squares checked${bingoCount>0?` · ${bingoCount} Bingo${bingoCount>1?"s":""}!`:""}</div>
-          ${bingoCount>0?`<div class="bingo-congrats">You got a Bingo! ♡</div>`:""}
-        </div>
-        <button class="bingo-reset-btn" onclick="resetBingo('${b.id}')">Reset card</button>
-      </div>
-    </div>
-  </div>`;
+  const arr=getBingo(b),lines=bingoLines(arr),lineSet=new Set(lines.flat()),bingoCount=lines.length,checked=checkedCount(b);
+  const cells=BINGO_SQUARES.map((sq,i)=>{if(i===12)return`<div class="bingo-cell bingo-free">★</div>`;const isChecked=arr[i],isLine=lineSet.has(i);return`<div class="bingo-cell${isChecked?" checked":""}${isLine?" bingo-line":""}" onclick="toggleBingoCell('${b.id}',${i})">${esc(sq)}</div>`;}).join("");
+  return`<div class="bingo-overlay" onclick="closeBingo()"><div class="bingo-modal" onclick="event.stopPropagation()"><div class="bingo-modal-head"><h2>Book Bingo</h2><button class="bingo-modal-close" onclick="closeBingo()">×</button></div><div class="bingo-book-sub">${esc(b.title)}${b.author?" · "+esc(b.author):""}</div><div class="bingo-instructions">Mark each square that reflects how you felt while reading. Complete a row, column, or diagonal to earn a Bingo!</div><div class="bingo-card-wrap"><div class="bingo-header-row">${"BINGO".split("").map(l=>`<div class="bingo-header-cell">${l}</div>`).join("")}</div><div class="bingo-grid">${cells}</div></div><div class="bingo-footer"><div><div class="bingo-score">${checked} / 24 squares checked${bingoCount>0?` · ${bingoCount} Bingo${bingoCount>1?"s":""}!`:""}</div>${bingoCount>0?`<div class="bingo-congrats">You got a Bingo! ♡</div>`:""}</div><button class="bingo-reset-btn" onclick="resetBingo('${b.id}')">Reset card</button></div></div></div>`;
 }
 
 function bingoTabHTML(){
   const rb=books.filter(b=>b.status==="Read");
   if(rb.length===0)return`<div class="bingo-empty"><div class="bingo-empty-title">No finished books yet</div><div class="empty-sub">Mark a book as Read to unlock its bingo card</div></div>`;
-  return`<div class="bingo-tab-grid">
-    ${rb.map(b=>{
-      const arr=getBingo(b);
-      const bingoCount=bingoLines(arr).length;
-      const miniCells=arr.map((v,i)=>`<div class="bingo-mini-cell${i===12?" free":v?" on":""}"></div>`).join("");
-      return`<div class="bingo-list-card" onclick="openBingo('${b.id}')">
-        <div class="bingo-list-title">${esc(b.title)}</div>
-        <div class="bingo-list-author">by ${esc(b.author||"Unknown")}</div>
-        <div class="bingo-mini-grid">${miniCells}</div>
-        <div class="bingo-progress">${checkedCount(b)} / 24 checked${bingoCount>0?` · <span>${bingoCount} Bingo${bingoCount>1?"s":""}!</span>`:`<span></span>`}</div>
-      </div>`;
-    }).join("")}
-  </div>`;
+  return`<div class="bingo-tab-grid">${rb.map(b=>{const arr=getBingo(b),bingoCount=bingoLines(arr).length,miniCells=arr.map((v,i)=>`<div class="bingo-mini-cell${i===12?" free":v?" on":""}"></div>`).join("");return`<div class="bingo-list-card" onclick="openBingo('${b.id}')"><div class="bingo-list-title">${esc(b.title)}</div><div class="bingo-list-author">by ${esc(b.author||"Unknown")}</div><div class="bingo-mini-grid">${miniCells}</div><div class="bingo-progress">${checkedCount(b)} / 24 checked${bingoCount>0?` · <span>${bingoCount} Bingo${bingoCount>1?"s":""}!</span>`:`<span></span>`}</div></div>`;}).join("")}</div>`;
 }
 
-// ── WISH MODAL ────────────────────────────────────────
+// ── WISH ──
 function wishModalHTML(){
   if(!showWishForm)return"";
-  const f=wishForm;
-  const pOpts=["high","medium","low"].map(p=>`<option value="${p}"${f.priority===p?" selected":""}>${p.charAt(0).toUpperCase()+p.slice(1)}</option>`).join("");
-  return`<div class="wish-overlay" onclick="closeWishForm()"><div class="wish-modal" onclick="event.stopPropagation()">
-    <h2>${wishEditId?"Edit Book Details":"Add Book Details"}</h2>
-    <div class="wish-form">
-      <div class="wish-field"><label>Book Title</label><input type="text" placeholder="Title" value="${esc(f.title||"")}" id="wf_title"></div>
-      <div class="wish-field"><label>Author</label><input type="text" placeholder="Author" value="${esc(f.author||"")}" id="wf_author"></div>
-      <div class="wish-field"><label>Price (optional)</label><input type="text" placeholder="e.g. ₱899" value="${esc(f.price||"")}" id="wf_price"></div>
-      <div class="wish-field"><label>Priority</label><select id="wf_priority">${pOpts}</select></div>
-      <div class="wish-field"><label>Notes</label><input type="text" placeholder="Where to buy, edition, etc." value="${esc(f.notes||"")}" id="wf_notes"></div>
-      <div class="wish-btns">
-        <button class="btn-save" onclick="saveWish()">${wishEditId?"Save":"Add to Wishlist"}</button>
-        <button class="btn-cancel" onclick="closeWishForm()">Cancel</button>
-      </div>
-    </div>
-  </div></div>`;
+  const f=wishForm,pOpts=["high","medium","low"].map(p=>`<option value="${p}"${f.priority===p?" selected":""}>${p.charAt(0).toUpperCase()+p.slice(1)}</option>`).join("");
+  return`<div class="wish-overlay" onclick="closeWishForm()"><div class="wish-modal" onclick="event.stopPropagation()"><h2>${wishEditId?"Edit Book Details":"Add Book Details"}</h2><div class="wish-form"><div class="wish-field"><label>Book Title</label><input type="text" placeholder="Title" value="${esc(f.title||"")}" id="wf_title"></div><div class="wish-field"><label>Author</label><input type="text" placeholder="Author" value="${esc(f.author||"")}" id="wf_author"></div><div class="wish-field"><label>Price (optional)</label><input type="text" placeholder="e.g. ₱899" value="${esc(f.price||"")}" id="wf_price"></div><div class="wish-field"><label>Priority</label><select id="wf_priority">${pOpts}</select></div><div class="wish-field"><label>Notes</label><input type="text" placeholder="Where to buy, edition, etc." value="${esc(f.notes||"")}" id="wf_notes"></div><div class="wish-btns"><button class="btn-save" onclick="saveWish()">${wishEditId?"Save":"Add to Wishlist"}</button><button class="btn-cancel" onclick="closeWishForm()">Cancel</button></div></div></div></div>`;
 }
-
-// ── WISH ACTIONS ─────────────────────────────────────
 function openWishAdd(){wishForm={title:"",author:"",price:"",priority:"medium",notes:"",bought:false};wishEditId=null;showWishForm=true;render();}
-function openWishEdit(id){const w=wishlist.find(x=>x.id===id);if(!w)return;wishForm={...w};wishEditId=id;showWishForm=true;render();}
 function closeWishForm(){showWishForm=false;wishEditId=null;render();}
 function saveWish(){
   const t=document.getElementById("wf_title"),a=document.getElementById("wf_author"),p=document.getElementById("wf_price"),pr=document.getElementById("wf_priority"),n=document.getElementById("wf_notes");
@@ -759,179 +722,54 @@ function saveWish(){
   save();showWishForm=false;wishEditId=null;render();
 }
 function toggleWishBought(id){wishlist=wishlist.map(w=>w.id===id?{...w,bought:!w.bought}:w);save();render();}
-function deleteWish(id){if(!confirm("Remove this order?"))return;wishlist=wishlist.filter(w=>w.id!==id);save();render();}
+function deleteWish(id){if(!confirm("Remove this?"))return;wishlist=wishlist.filter(w=>w.id!==id);save();render();}
 
-// ── ORDER BOARD ───────────────────────────────────────
 function orderBoardHTML(){
-  const total=wishlist.length;
-  const bought=wishlist.filter(w=>w.bought).length;
+  const total=wishlist.length,bought=wishlist.filter(w=>w.bought).length;
   const prioLabel={high:"🔥 High",medium:"☕ Medium",low:"🍃 Low"};
-  return`<div class="order-board">
-    <div class="order-board-head"><h3>Book Wishlist </h3></div>
-    <p class="order-board-sub">Every great library begins with a wish.</p>
-    <div class="order-summary">
-      <div class="order-stat"><span>Want to Read</span><strong>${total-bought}</strong></div>
-      <div class="order-stat"><span>Purchased</span><strong>${bought}</strong></div>
-      <div class="order-stat"><span>Total</span><strong>${total}</strong></div>
-    </div>
-    <button class="btn-add-order" onclick="openWishAdd()">+ Add Book</button>
-    <div class="order-list">
-      ${total===0?`<p style="text-align:center;color:var(--muted);font-style:italic;font-size:13px;padding:20px 0"> No books on your wishlist yet.
-Start adding the stories you can't wait to discover.</p>`
-      :wishlist.sort((a,b)=>({high:0,medium:1,low:2}[a.priority]||1)-({high:0,medium:1,low:2}[b.priority]||1)).map(w=>`
-        <div class="order-item${w.bought?" bought":""}">
-          <div class="order-check${w.bought?" done":""}" onclick="toggleWishBought('${w.id}')">${w.bought?"✓":""}</div>
-          <div class="order-info">
-            <div class="order-title">${esc(w.title)}</div>
-            ${w.author?`<div class="order-author">${esc(w.author)}</div>`:""}
-            <div class="order-tags">
-              ${w.price?`<span class="order-price">💰 ${esc(w.price)}</span>`:""}
-              <span class="order-priority ${w.priority||"medium"}">${prioLabel[w.priority]||"☕ Medium"}</span>
-              ${w.notes?`<span class="order-price">${esc(w.notes)}</span>`:""}
-            </div>
-          </div>
-          <button class="order-del" onclick="deleteWish('${w.id}')" title="Remove">×</button>
-        </div>`).join("")}
-    </div>
-  </div>`;
+  return`<div class="order-board"><div class="order-board-head"><h3>Book Wishlist</h3></div><p class="order-board-sub">Every great library begins with a wish.</p><div class="order-summary"><div class="order-stat"><span>Want to Read</span><strong>${total-bought}</strong></div><div class="order-stat"><span>Purchased</span><strong>${bought}</strong></div><div class="order-stat"><span>Total</span><strong>${total}</strong></div></div><button class="btn-add-order" onclick="openWishAdd()">+ Add Book</button><div class="order-list">${total===0?`<p style="text-align:center;color:var(--muted);font-style:italic;font-size:13px;padding:20px 0">No books on your wishlist yet. Start adding the stories you can't wait to discover.</p>`:wishlist.sort((a,b)=>({high:0,medium:1,low:2}[a.priority]||1)-({high:0,medium:1,low:2}[b.priority]||1)).map(w=>`<div class="order-item${w.bought?" bought":""}"><div class="order-check${w.bought?" done":""}" onclick="toggleWishBought('${w.id}')">${w.bought?"✓":""}</div><div class="order-info"><div class="order-title">${esc(w.title)}</div>${w.author?`<div class="order-author">${esc(w.author)}</div>`:""}<div class="order-tags">${w.price?`<span class="order-price">💰 ${esc(w.price)}</span>`:""}<span class="order-priority ${w.priority||"medium"}">${prioLabel[w.priority]||"☕ Medium"}</span>${w.notes?`<span class="order-price">${esc(w.notes)}</span>`:""}</div></div><button class="order-del" onclick="deleteWish('${w.id}')" title="Remove">×</button></div>`).join("")}</div></div>`;
 }
 
-// ── MOCHA RECOMMENDATION ──────────────────────────────
-const MOCHA_MSGS=[
-  "I knocked this one off the shelf this morning — must be a sign.",
-  "I've been sitting on top of this one all week. Take the hint!",
-  "I pawed at this one until it fell open. Smells promising.",
-  "This spine has been calling to me. I think it's your turn.",
-  "I curled up on this one during my nap. It felt right.",
-  "I chose this one purrsonally. Trust the process.",
-  "My whiskers tingled when I walked past this title.",
-  "I stared at this one for exactly seven minutes. You know what that means.",
-  "This one kept me up at 3am — not that I was reading, just judging.",
-  "Found this one behind the cushions. Serendipity!",
-];
-function getUnread(){return books.filter(b=>b.status==="Unread");}
-function pickMochaRec(){
-  const unread=getUnread();
-  if(!unread.length){showMochaRec=true;render();return;}
-  const pool=unread.filter(b=>b.id!==mochaRecId);
-  const pick=pool.length?pool:unread;
-  mochaRecId=pick[Math.floor(Math.random()*pick.length)].id;
-  showMochaRec=true;render();
-}
+const MOCHA_MSGS=["I knocked this one off the shelf this morning — must be a sign.","I've been sitting on top of this one all week. Take the hint!","I pawed at this one until it fell open. Smells promising.","This spine has been calling to me. I think it's your turn.","I curled up on this one during my nap. It felt right.","I chose this one purrsonally. Trust the process.","My whiskers tingled when I walked past this title.","I stared at this one for exactly seven minutes. You know what that means.","This one kept me up at 3am — not that I was reading, just judging.","Found this one behind the cushions. Serendipity!"];
+function pickMochaRec(){const unread=getUnread();if(!unread.length){showMochaRec=true;render();return;}const pool=unread.filter(b=>b.id!==mochaRecId);const pick=pool.length?pool:unread;mochaRecId=pick[Math.floor(Math.random()*pick.length)].id;showMochaRec=true;render();}
 function closeMochaRec(){showMochaRec=false;render();}
-function startReadingRec(){
-  if(!mochaRecId)return;
-  books=books.map(b=>b.id===mochaRecId?{...b,status:"Reading"}:b);
-  save();showMochaRec=false;render();
-}
+function startReadingRec(){if(!mochaRecId)return;books=books.map(b=>b.id===mochaRecId?{...b,status:"Reading"}:b);save();showMochaRec=false;render();}
 function mochaRecHTML(){
   if(!showMochaRec)return"";
   const unread=getUnread();
-  if(!unread.length)return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()">
-    <button class="rec-close" onclick="closeMochaRec()">×</button>
-    <img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif">
-    <p class="rec-tag">Pusheen says</p>
-    <p class="rec-title" style="font-size:15px;margin-bottom:12px">No unread books!</p>
-    <p class="rec-message">Add some new books to your shelf and I'll pick you something wonderful.</p>
-    <div class="rec-actions"><button class="rec-btn-start" onclick="closeMochaRec()">Got it ♡</button></div>
-  </div></div>`;
+  if(!unread.length)return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()"><button class="rec-close" onclick="closeMochaRec()">×</button><img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><p class="rec-tag">Pusheen says</p><p class="rec-title" style="font-size:15px;margin-bottom:12px">No unread books!</p><p class="rec-message">Add some books to your shelf first.</p><div class="rec-actions"><button class="rec-btn-start" onclick="closeMochaRec()">Got it ♡</button></div></div></div>`;
   const b=books.find(x=>x.id===mochaRecId)||unread[0];
   const msg=MOCHA_MSGS[(b.title.length+b.id.charCodeAt(0))%MOCHA_MSGS.length];
-  return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()">
-    <button class="rec-close" onclick="closeMochaRec()">×</button>
-    <img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif">
-    <p class="rec-tag">Pusheen's Pick for You</p>
-    <div class="rec-title">${esc(b.title)}</div>
-    <div class="rec-author">by ${esc(b.author||"Unknown")}</div>
-    ${b.genres&&b.genres.length?`<div class="rec-genres">${b.genres.map(g=>`<span class="rec-genre-pill">${esc(g)}</span>`).join("")}</div>`:""}
-    <div class="rec-message">"${esc(msg)}"</div>
-    <div class="rec-actions">
-      <button class="rec-btn-start" onclick="startReadingRec()">Start Reading</button>
-      <button class="rec-btn-pick" onclick="pickMochaRec()">Pick Another</button>
-    </div>
-  </div></div>`;
+  return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()"><button class="rec-close" onclick="closeMochaRec()">×</button><img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><p class="rec-tag">Pusheen's Pick for You</p><div class="rec-title">${esc(b.title)}</div><div class="rec-author">by ${esc(b.author||"Unknown")}</div>${b.genres&&b.genres.length?`<div class="rec-genres">${b.genres.map(g=>`<span class="rec-genre-pill">${esc(g)}</span>`).join("")}</div>`:""}<div class="rec-message">"${esc(msg)}"</div><div class="rec-actions"><button class="rec-btn-start" onclick="startReadingRec()">Start Reading</button><button class="rec-btn-pick" onclick="pickMochaRec()">Pick Another</button></div></div></div>`;
 }
 
-// ── HTML BUILDERS ─────────────────────────────────────
+// ── HTML BUILDERS ──
 function headerHTML(){
-  const icon=dark?"☀":"🌙";
-  const label=dark?"Light":"Dark";
-  return`<header><div class="wrap">
-    <div class="header-card">
-      <div class="header-inner">
-        <div class="brand">
-          <h1>Book Café <span class="steam-wrap"><canvas id="steamCanvas"></canvas>☕</span></h1>
-          <p>Your quiet nook for books, warm thoughts, and lattes</p>
-        </div>
-        <div class="header-controls">
-          <button class="toggle-dark" onclick="toggleDark()"><span class="toggle-dark-icon">${icon}</span> ${label}</button>
-          <button class="btn-add" onclick="openAdd()">+ Add Book</button>
-        </div>
-      </div>
-    </div>
-  </div></header>`;
+  const icon=dark?"☀":"🌙",label=dark?"Light":"Dark";
+  return`<header><div class="wrap"><div class="header-card"><div class="header-inner"><div class="brand"><h1>Book Café <span class="steam-wrap"><canvas id="steamCanvas"></canvas>☕</span></h1><p>Your quiet nook for books, warm thoughts, and lattes</p></div><div class="header-controls"><button class="toggle-dark" onclick="toggleDark()"><span class="toggle-dark-icon">${icon}</span> ${label}</button><button class="btn-add" onclick="openAdd()">+ Add Book</button></div></div></div></div></header>`;
 }
 
 function statsBarHTML(){
-  const unread=getUnread();
-  const rec=unread.find(b=>b.id===mochaRecId)||unread[0];
+  const unread=getUnread(),rec=unread.find(b=>b.id===mochaRecId)||unread[0];
   const mochaCell=rec
-    ?`<div class="stat-mocha" onclick="pickMochaRec()" title="Click to see Pusheen's recommendation">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif">
-        <div class="stat-mocha-info">
-          <div class="mocha-stat-lbl">Pusheen's Pick</div>
-          <div class="mocha-stat-title">${esc(rec.title)}</div>
-          <div class="mocha-stat-author">by ${esc(rec.author||"Unknown")}</div>
-        </div>
-      </div>`
-    :`<div class="stat-mocha" onclick="pickMochaRec()">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif">
-        <div class="stat-mocha-info">
-          <div class="mocha-stat-lbl">Pusheen's Pick</div>
-          <div class="mocha-stat-none">Add unread books!</div>
-        </div>
-      </div>`;
-  return`<div class="wrap"><div class="stats-row">
-    <div class="stat"><div class="stat-num">${books.length}</div><div class="stat-lbl">On Shelf</div></div>
-    <div class="stat"><div class="stat-num">${readBooks().length}</div><div class="stat-lbl">Finished</div></div>
-    <div class="stat"><div class="stat-num">${books.filter(b=>b.status==="Reading").length}</div><div class="stat-lbl">Reading</div></div>
-    ${mochaCell}
-  </div></div>`;
+    ?`<div class="stat-mocha" onclick="pickMochaRec()" title="Click for Pusheen's recommendation"><img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><div class="stat-mocha-info"><div class="mocha-stat-lbl">Pusheen's Pick</div><div class="mocha-stat-title">${esc(rec.title)}</div><div class="mocha-stat-author">by ${esc(rec.author||"Unknown")}</div></div></div>`
+    :`<div class="stat-mocha" onclick="pickMochaRec()"><img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><div class="stat-mocha-info"><div class="mocha-stat-lbl">Pusheen's Pick</div><div class="mocha-stat-none">Add unread books!</div></div></div>`;
+  return`<div class="wrap"><div class="stats-row"><div class="stat"><div class="stat-num">${books.length}</div><div class="stat-lbl">On Shelf</div></div><div class="stat"><div class="stat-num">${readBooks().length}</div><div class="stat-lbl">Finished</div></div><div class="stat"><div class="stat-num">${books.filter(b=>b.status==="Reading").length}</div><div class="stat-lbl">Reading</div></div>${mochaCell}</div></div>`;
 }
 
 function tabsHTML(){
-  return`<div class="wrap"><div class="tabs">
-    ${[["dashboard","The Café"],["library","Bookshelf"],["favorites","Favourite Reads"],["bingo","Bingo Cards"],["goals","Goals"]].map(([k,l])=>`<button class="tab${tab===k?" active":""}" onclick="setTab('${k}')">${l}</button>`).join("")}
-  </div></div>`;
+  return`<div class="wrap"><div class="tabs">${[["dashboard","The Café"],["library","Bookshelf"],["favorites","Favourite Reads"],["bingo","Bingo Cards"],["goals","Goals"]].map(([k,l])=>`<button class="tab${tab===k?" active":""}" onclick="setTab('${k}')">${l}</button>`).join("")}</div></div>`;
 }
 
-// DASHBOARD
 function currentlyReadingHTML(){
   const cr=currentBook();
   if(!cr)return`<div class="currently-reading"><div><div class="cr-label">Currently Reading</div><div class="cr-none">No book in progress right now.<br>Start one from the bookshelf!</div></div></div>`;
   const pct=cr.pages>0?Math.round((cr.pagesRead||0)/cr.pages*100):0;
   const cover=cr.cover?`<img src="${esc(cr.cover)}" alt="">`:cr.title?`<div class="cr-cover-placeholder">${esc(cr.title)}</div>`:"";
-  return`<div class="currently-reading">
-    <div class="cr-cover">${cover}</div>
-    <div class="cr-info">
-      <div class="cr-label">Currently Reading</div>
-      <div class="cr-title">${esc(cr.title)}</div>
-      <div class="cr-author">by ${esc(cr.author||"Unknown")}</div>
-      ${cr.notes?`<div class="cr-quote">${esc(cr.notes.slice(0,80))}${cr.notes.length>80?"…":""}</div>`:""}
-      ${cr.pages>0?`
-        <div class="cr-progress-bar"><div class="cr-progress-fill" style="width:${pct}%"></div></div>
-        <div class="cr-progress-label">${cr.pagesRead||0} / ${cr.pages} pages — ${pct}%</div>
-      `:`<div class="cr-progress-label" style="color:var(--muted);font-style:italic;font-size:11px">Add page info when editing this book</div>`}
-    </div>
-  </div>`;
+  return`<div class="currently-reading"><div class="cr-cover">${cover}</div><div class="cr-info"><div class="cr-label">Currently Reading</div><div class="cr-title">${esc(cr.title)}</div><div class="cr-author">by ${esc(cr.author||"Unknown")}</div>${cr.notes?`<div class="cr-quote">${esc(cr.notes.slice(0,80))}${cr.notes.length>80?"…":""}</div>`:""}${cr.pages>0?`<div class="cr-progress-bar"><div class="cr-progress-fill" style="width:${pct}%"></div></div><div class="cr-progress-label">${cr.pagesRead||0} / ${cr.pages} pages — ${pct}%</div>`:`<div class="cr-progress-label" style="color:var(--muted);font-style:italic;font-size:11px">Add page info when editing this book</div>`}</div></div>`;
 }
 
-const gifs = [
-  "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTllOHFqY3lvb3g2NHo0Mjd6anUxNzU5Mjl0dzIxNjdkcnQ2NjZhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/JjTeN1ZuJuYik6oDuu/giphy.gif",
-  "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hnYjNieGh3ZGR6d3o1Zm93cWR6NGl0Nmd2cjhnc2UxZ3dvOGlzcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/apow2YS2BEAHB4jV0D/giphy.gif",
-  "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUycW9ybjh4bzEweGozNTJjam1tZjNlMWluNzJ0cWhtaGkwd3hpZzk3cSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/dw4qHGqzP3GCzAAQyQ/source.gif",
-  "https://www.gifcen.com/wp-content/uploads/2022/03/pusheen-gif-6.gif"
-];
+const gifs=["https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTllOHFqY3lvb3g2NHo0Mjd6anUxNzU5Mjl0dzIxNjdkcnQ2NjZhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/JjTeN1ZuJuYik6oDuu/giphy.gif","https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hnYjNieGh3ZGR6d3o1Zm93cWR6NGl0Nmd2cjhnc2UxZ3dvOGlzcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/apow2YS2BEAHB4jV0D/giphy.gif","https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUycW9ybjh4bzEweGozNTJjam1tZjNlMWluNzJ0cWhtaGkwd3hpZzk3cSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/dw4qHGqzP3GCzAAQyQ/source.gif","https://www.gifcen.com/wp-content/uploads/2022/03/pusheen-gif-6.gif"];
 
 function dashboardHTML(){
   const read=readBooks(),pct=Math.min(100,Math.round((read.length/goal)*100));
@@ -939,7 +777,16 @@ function dashboardHTML(){
   const q=QUOTES[Math.floor(Date.now()/86400000)%QUOTES.length];
   const note=READING_NOTES[read.length%READING_NOTES.length];
   const favCount=books.filter(b=>b.favorite).length;
-  return`
+
+  const emptyShelf = books.length === 0 ? `
+    <div style="text-align:center;padding:32px 20px;background:var(--soft);border-radius:12px;border:1.5px dashed var(--border);margin-bottom:20px;">
+      <div style="font-family:'Lora',serif;font-size:18px;color:var(--accent);font-weight:700;margin-bottom:8px;">Your shelf is empty</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;font-style:italic;">Add your first book to get started. It can be something you're reading right now, something you just finished, or a book waiting on your nightstand.</p>
+<button class="btn-add" onclick="openAdd()">
+  + Add Your First Book
+</button>    </div>` : "";
+
+  return`${emptyShelf}
     <div class="dash-grid">
       <div>${currentlyReadingHTML()}</div>
       <div class="goal-card-dash">
@@ -982,65 +829,27 @@ function libraryHTML(){
   const f=getFiltered();
   const gOpts=GENRES.map(g=>`<option value="${esc(g)}"${fG===g?" selected":""}>${esc(g)}</option>`).join("");
   const sOpts=STATUSES.map(s=>`<option value="${esc(s)}"${fS===s?" selected":""}>${esc(s)}</option>`).join("");
-  return`<div class="toolbar">
-    <div class="search-wrap"><span class="search-icon">⌕</span><input type="text" placeholder="Search your shelf..." value="${esc(search)}" oninput="setSearch(this.value)"></div>
-    <select class="fi" onchange="setFG(this.value)"><option value="All">All Genres</option>${gOpts}</select>
-    <select class="fi" onchange="setFS(this.value)"><option value="All">All Statuses</option>${sOpts}</select>
-  </div>
-  ${f.length===0?`<div class="empty"><div class="empty-title">${search||fG!=="All"||fS!=="All"?"No matches found":"Your shelf is empty"}</div><div class="empty-sub">${search||fG!=="All"||fS!=="All"?"Try different filters":"Add your first book to begin"}</div></div>`:`<div class="book-grid">${f.map(cardHTML).join("")}</div>`}`;
+  return`<div class="toolbar"><div class="search-wrap"><span class="search-icon">⌕</span><input type="text" placeholder="Search your shelf..." value="${esc(search)}" oninput="setSearch(this.value)"></div><select class="fi" onchange="setFG(this.value)"><option value="All">All Genres</option>${gOpts}</select><select class="fi" onchange="setFS(this.value)"><option value="All">All Statuses</option>${sOpts}</select></div>${f.length===0?`<div class="empty"><div class="empty-title">${search||fG!=="All"||fS!=="All"?"No matches found":"Your shelf is empty"}</div><div class="empty-sub">${search||fG!=="All"||fS!=="All"?"Try different filters":`<button onclick="openAdd()" style="margin-top:12px;background:var(--accent);color:#fff;border:none;border-radius:24px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;">+ Add Your First Book</button>`}</div></div>`:`<div class="book-grid">${f.map(cardHTML).join("")}</div>`}`;
 }
 
 function cardHTML(b){
   const cover=b.cover?`<img src="${esc(b.cover)}" alt="">`:`<div class="cover-placeholder">${esc(b.title)}</div>`;
-  const bingoBadge=b.status==="Read"
-    ?`<div class="${"bingo-badge"+(hasBingo(b)?" has-bingo":"")}" onclick="event.stopPropagation();openBingo('${b.id}')">${hasBingo(b)?"★ Bingo!":"◻ Bingo"}</div>`
-    :"";
-  return`<div class="book-card" onclick="openEdit('${b.id}')">
-    <div class="book-cover">${cover}
-      <button class="fav-btn" onclick="event.stopPropagation();toggleFav('${b.id}')">${b.favorite?"♥":"♡"}</button>
-      <span class="status-dot" style="background:${SC[b.status]}" title="${b.status}"></span>
-    </div>
-    <div class="book-info">
-      <div class="book-title">${esc(b.title)}</div>
-      <div class="book-author">by ${esc(b.author||"Unknown")}</div>
-      ${b.rating?`<div class="book-stars">${stars(b.rating)}</div>`:""}
-      ${b.genres.length?`<div class="book-genres">${b.genres.slice(0,2).map(g=>`<span class="genre-pill">${esc(g)}</span>`).join("")}</div>`:""}
-      ${b.dateFinished?`<div class="book-date">${esc(b.dateFinished)}</div>`:""}
-      ${bingoBadge}
-    </div>
-  </div>`;
+  const bingoBadge=b.status==="Read"?`<div class="${"bingo-badge"+(hasBingo(b)?" has-bingo":"")}" onclick="event.stopPropagation();openBingo('${b.id}')">${hasBingo(b)?"★ Bingo!":"◻ Bingo"}</div>`:"";
+  return`<div class="book-card" onclick="openEdit('${b.id}')"><div class="book-cover">${cover}<button class="fav-btn" onclick="event.stopPropagation();toggleFav('${b.id}')">${b.favorite?"♥":"♡"}</button><span class="status-dot" style="background:${SC[b.status]}" title="${b.status}"></span></div><div class="book-info"><div class="book-title">${esc(b.title)}</div><div class="book-author">by ${esc(b.author||"Unknown")}</div>${b.rating?`<div class="book-stars">${stars(b.rating)}</div>`:""}${b.genres.length?`<div class="book-genres">${b.genres.slice(0,2).map(g=>`<span class="genre-pill">${esc(g)}</span>`).join("")}</div>`:""}${b.dateFinished?`<div class="book-date">${esc(b.dateFinished)}</div>`:""}${bingoBadge}</div></div>`;
 }
 
 function favsHTML(){
   const f=books.filter(b=>b.favorite);
-  return`<p class="favs-intro">Volumes that claimed a permanent home in your heart.</p>
-  ${f.length===0?`<div class="empty"><div class="empty-title">No favourites yet</div><div class="empty-sub">Heart a book from your shelf</div></div>`:`<div class="book-grid">${f.map(cardHTML).join("")}</div>`}`;
+  return`<p class="favs-intro">Volumes that claimed a permanent home in your heart.</p>${f.length===0?`<div class="empty"><div class="empty-title">No favourites yet</div><div class="empty-sub">Heart a book from your shelf</div></div>`:`<div class="book-grid">${f.map(cardHTML).join("")}</div>`}`;
 }
 
-function statsTabHTML(){return`<div class="charts-grid">
-  <div class="chart-card"><h3>By Genre</h3><div class="chart-wrap"><canvas id="cG"></canvas></div></div>
-  <div class="chart-card"><h3>Reading Status</h3><div class="chart-wrap"><canvas id="cS"></canvas></div></div>
-  <div class="chart-card"><h3>Ratings</h3><div class="chart-wrap"><canvas id="cR"></canvas></div></div>
-</div>`;}
+function statsTabHTML(){return`<div class="charts-grid"><div class="chart-card"><h3>By Genre</h3><div class="chart-wrap"><canvas id="cG"></canvas></div></div><div class="chart-card"><h3>Reading Status</h3><div class="chart-wrap"><canvas id="cS"></canvas></div></div><div class="chart-card"><h3>Ratings</h3><div class="chart-wrap"><canvas id="cR"></canvas></div></div></div>`;}
 
 function goalsHTML(){
   const read=readBooks(),pct=Math.min(100,Math.round((read.length/goal)*100));
   const recent=[...books].sort((a,b)=>((b.dateFinished||"0")>(a.dateFinished||"0")?1:-1)).slice(0,6);
   const note=READING_NOTES[read.length%READING_NOTES.length];
-  return`${orderBoardHTML()}
-  <div class="goals-layout">
-    <div class="goal-card-full">
-      <h3>Reading Ritual — ${new Date().getFullYear()}</h3>
-      <div class="goal-row"><label>Yearly Target:</label><input type="number" value="${goal}" min="1" max="999" onchange="setGoal(this.value)"></div>
-      <div class="progress-top"><span>Progress</span><span>${read.length} / ${goal} volumes</span></div>
-      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="ritual-note">${note}</div>
-    </div>
-    <div class="recent-card">
-      <h3>Recent Activity</h3>
-      ${recent.length===0?`<p style="color:var(--muted);font-style:italic;font-size:13px">Your journal is empty.</p>`:`<ul class="recent-list">${recent.map(b=>`<li class="recent-item"><div class="recent-meta"><span class="recent-title-t">${esc(b.title)}</span><span class="recent-author-t">by ${esc(b.author||"Unknown")}</span></div><span class="recent-status" style="color:${SC[b.status]}">${b.status}</span></li>`).join("")}</ul>`}
-    </div>
-  </div>`;
+  return`${orderBoardHTML()}<div class="goals-layout"><div class="goal-card-full"><h3>Reading Ritual — ${new Date().getFullYear()}</h3><div class="goal-row"><label>Yearly Target:</label><input type="number" value="${goal}" min="1" max="999" onchange="setGoal(this.value)"></div><div class="progress-top"><span>Progress</span><span>${read.length} / ${goal} volumes</span></div><div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><div class="ritual-note">${note}</div></div><div class="recent-card"><h3>Recent Activity</h3>${recent.length===0?`<p style="color:var(--muted);font-style:italic;font-size:13px">Your journal is empty.</p>`:`<ul class="recent-list">${recent.map(b=>`<li class="recent-item"><div class="recent-meta"><span class="recent-title-t">${esc(b.title)}</span><span class="recent-author-t">by ${esc(b.author||"Unknown")}</span></div><span class="recent-status" style="color:${SC[b.status]}">${b.status}</span></li>`).join("")}</ul>`}</div></div>`;
 }
 
 function formHTML(){
@@ -1048,39 +857,10 @@ function formHTML(){
   const f=form,isEdit=!!editId;
   const gTags=GENRES.map(g=>`<button type="button" class="genre-tag${f.genres.includes(g)?" sel":""}" onclick="toggleG('${g}')">${esc(g)}</button>`).join("");
   const rOpts=[0,1,2,3,4,5].map(n=>`<option value="${n}"${f.rating===n?" selected":""}>${n===0?"No rating":stars(n)}</option>`).join("");
-  return`<div class="overlay" id="bookFormModal" onclick="closeForm()"><div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-head"><h2>${isEdit?"Edit Book":"Add a Book"}</h2><button class="modal-close" onclick="closeForm()">×</button></div>
-    <div style="text-align:center;margin-bottom:16px">
-      <div class="cover-upload" onclick="document.getElementById('covF').click()">
-        ${f.cover?`<img src="${esc(f.cover)}" alt="">`:`<span class="cover-upload-icon">↑</span><span class="cover-upload-lbl">Cover</span>`}
-      </div>
-      <button type="button" class="cover-btn" onclick="document.getElementById('covF').click()">Upload cover image</button>
-      <input type="file" id="covF" accept="image/*" style="display:none" onchange="handleCover(this)">
-    </div>
-    <div class="form-grid">
-      <div class="form-field"><label>Title</label><input type="text" placeholder="Book title" value="${esc(f.title)}" id="fi_title"></div>
-      <div class="form-field"><label>Author</label><input type="text" placeholder="Author name" value="${esc(f.author||"")}" id="fi_author"></div>
-      <div class="form-half">
-        <div class="form-field"><label>Status</label><select id="fi_status" onchange="syncFormFromDOM();renderFormOnly()">${STATUSES.map(s=>`<option${f.status===s?" selected":""}>${s}</option>`).join("")}</select></div>
-        <div class="form-field"><label>Rating</label><select id="fi_rating">${rOpts}</select></div>
-      </div>
-      ${f.status==="Reading"?`<div class="form-half"><div class="form-field"><label>Pages Read</label><input type="number" placeholder="0" value="${f.pagesRead||0}" id="fi_pagesRead"></div><div class="form-field"><label>Total Pages</label><input type="number" placeholder="0" value="${f.pages||0}" id="fi_pagesTotal"></div></div>`:""}
-      ${f.status==="Read"?`<div class="form-field"><label>Date Finished</label><input type="date" value="${esc(f.dateFinished||"")}" id="fi_date"></div>`:""}
-      <div class="form-field"><label>Genres</label><div class="genre-tags">${gTags}</div></div>
-      <div class="form-field"><label>Notes</label><textarea placeholder="A quote, a feeling, a thought..." rows="3" id="fi_notes">${esc(f.notes||"")}</textarea></div>
-      <label class="fav-label"><input type="checkbox" ${f.favorite?"checked":""} onchange="form.favorite=this.checked"> Mark as a favourite</label>
-      <div class="form-btns-row">
-        ${isEdit?`<button type="button" class="btn-delete" onclick="delBookFromForm('${editId}')">Remove book</button>`:""}
-        <div class="form-btns">
-          <button type="button" class="btn-save" onclick="saveBook()">${isEdit?"Save Changes":"Place on Shelf"}</button>
-          <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div></div>`;
+  return`<div class="overlay" id="bookFormModal" onclick="closeForm()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-head"><h2>${isEdit?"Edit Book":"Add a Book"}</h2><button class="modal-close" onclick="closeForm()">×</button></div><div style="text-align:center;margin-bottom:16px"><div class="cover-upload" onclick="document.getElementById('covF').click()">${f.cover?`<img src="${esc(f.cover)}" alt="">`:`<span class="cover-upload-icon">↑</span><span class="cover-upload-lbl">Cover</span>`}</div><button type="button" class="cover-btn" onclick="document.getElementById('covF').click()">Upload cover image</button><input type="file" id="covF" accept="image/*" style="display:none" onchange="handleCover(this)"></div><div class="form-grid"><div class="form-field"><label>Title</label><input type="text" placeholder="Book title" value="${esc(f.title)}" id="fi_title"></div><div class="form-field"><label>Author</label><input type="text" placeholder="Author name" value="${esc(f.author||"")}" id="fi_author"></div><div class="form-half"><div class="form-field"><label>Status</label><select id="fi_status" onchange="syncFormFromDOM();renderFormOnly()">${STATUSES.map(s=>`<option${f.status===s?" selected":""}>${s}</option>`).join("")}</select></div><div class="form-field"><label>Rating</label><select id="fi_rating">${rOpts}</select></div></div>${f.status==="Reading"?`<div class="form-half"><div class="form-field"><label>Pages Read</label><input type="number" placeholder="0" value="${f.pagesRead||0}" id="fi_pagesRead"></div><div class="form-field"><label>Total Pages</label><input type="number" placeholder="0" value="${f.pages||0}" id="fi_pagesTotal"></div></div>`:""}${f.status==="Read"?`<div class="form-field"><label>Date Finished</label><input type="date" value="${esc(f.dateFinished||"")}" id="fi_date"></div>`:""}<div class="form-field"><label>Genres</label><div class="genre-tags">${gTags}</div></div><div class="form-field"><label>Notes</label><textarea placeholder="A quote, a feeling, a thought..." rows="3" id="fi_notes">${esc(f.notes||"")}</textarea></div><label class="fav-label"><input type="checkbox" ${f.favorite?"checked":""} onchange="form.favorite=this.checked"> Mark as a favourite</label><div class="form-btns-row">${isEdit?`<button type="button" class="btn-delete" onclick="delBookFromForm('${editId}')">Remove book</button>`:""}<div class="form-btns"><button type="button" class="btn-save" onclick="saveBook()">${isEdit?"Save Changes":"Place on Shelf"}</button><button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button></div></div></div></div></div>`;
 }
 
-// ── RENDER ────────────────────────────────────────────
+// ── RENDER ──
 function render(){
   applyTheme();
   let tc="";
@@ -1096,79 +876,28 @@ function render(){
     `<footer>Built with love · May your coffee stay warm and your pages never run out ♡</footer>`+
     formHTML()+bingoModalHTML()+wishModalHTML()+mochaRecHTML();
   if(tab==="stats")renderCharts();
-  if(tab==="dashboard"){drawPetCat();}
   initSteam();
 }
 
-// ── ACTIONS ───────────────────────────────────────────
+// ── ACTIONS ──
 function setTab(t){tab=t;render();}
 function toggleDark(){dark=!dark;save();render();}
 function setSearch(v){search=v;render();}
 function setFG(v){fG=v;render();}
 function setFS(v){fS=v;render();}
 function setGoal(v){goal=Math.max(1,parseInt(v)||1);save();render();}
-
-function openAdd(){
-  form={title:"",author:"",status:"Unread",rating:0,genres:[],notes:"",dateFinished:"",cover:null,favorite:false,pages:0,pagesRead:0};
-  editId=null;showForm=true;render();
-}
-function openEdit(id){
-  const b=books.find(x=>x.id===id);
-  if(!b)return;
-  form=JSON.parse(JSON.stringify(b));
-  editId=id;showForm=true;render();
-}
+function openAdd(){form={title:"",author:"",status:"Unread",rating:0,genres:[],notes:"",dateFinished:"",cover:null,favorite:false,pages:0,pagesRead:0};editId=null;showForm=true;render();}
+function openEdit(id){const b=books.find(x=>x.id===id);if(!b)return;form=JSON.parse(JSON.stringify(b));editId=id;showForm=true;render();}
 function closeForm(){showForm=false;editId=null;render();}
-
-function saveBook(){
-  syncFormFromDOM();
-  if(!form.title.trim()){alert("Please enter a book title.");return;}
-  if(editId){books=books.map(b=>b.id===editId?{...form,id:editId}:b);}
-  else{books.push({...form,id:genId()});}
-  save();showForm=false;editId=null;render();
-}
-
-function delBook(id){if(!confirm("Remove this book?"))return;books=books.filter(b=>b.id!==id);save();render();}
+function saveBook(){syncFormFromDOM();if(!form.title.trim()){alert("Please enter a book title.");return;}if(editId){books=books.map(b=>b.id===editId?{...form,id:editId}:b);}else{books.push({...form,id:genId()});}save();showForm=false;editId=null;render();}
 function delBookFromForm(id){if(!confirm("Remove this book from your shelf?"))return;books=books.filter(b=>b.id!==id);save();showForm=false;editId=null;render();}
 function toggleFav(id){books=books.map(b=>b.id===id?{...b,favorite:!b.favorite}:b);save();render();}
-function toggleG(g){
-  syncFormFromDOM();
-  if(form.genres.includes(g))form.genres=form.genres.filter(x=>x!==g);
-  else form.genres.push(g);
-  renderFormOnly();
-}
-function handleCover(input){
-  syncFormFromDOM();
-  const f=input.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{form.cover=ev.target.result;renderFormOnly();};
-  r.readAsDataURL(f);
-}
-function syncFormFromDOM(){
-  const t=document.getElementById("fi_title");
-  const a=document.getElementById("fi_author");
-  const s=document.getElementById("fi_status");
-  const r=document.getElementById("fi_rating");
-  const n=document.getElementById("fi_notes");
-  const d=document.getElementById("fi_date");
-  const pr=document.getElementById("fi_pagesRead");
-  const pp=document.getElementById("fi_pagesTotal");
-  if(t)form.title=t.value;
-  if(a)form.author=a.value;
-  if(s)form.status=s.value;
-  if(r)form.rating=parseInt(r.value)||0;
-  if(n)form.notes=n.value;
-  if(d)form.dateFinished=d.value;
-  if(pr)form.pagesRead=parseInt(pr.value)||0;
-  if(pp)form.pages=parseInt(pp.value)||0;
-}
-function renderFormOnly(){
-  let el=document.getElementById("bookFormModal");
-  if(!el){render();return;}
-  el.outerHTML=formHTML();
-}
+function toggleG(g){syncFormFromDOM();if(form.genres.includes(g))form.genres=form.genres.filter(x=>x!==g);else form.genres.push(g);renderFormOnly();}
+function handleCover(input){syncFormFromDOM();const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{form.cover=ev.target.result;renderFormOnly();};r.readAsDataURL(f);}
+function syncFormFromDOM(){const t=document.getElementById("fi_title"),a=document.getElementById("fi_author"),s=document.getElementById("fi_status"),r=document.getElementById("fi_rating"),n=document.getElementById("fi_notes"),d=document.getElementById("fi_date"),pr=document.getElementById("fi_pagesRead"),pp=document.getElementById("fi_pagesTotal");if(t)form.title=t.value;if(a)form.author=a.value;if(s)form.status=s.value;if(r)form.rating=parseInt(r.value)||0;if(n)form.notes=n.value;if(d)form.dateFinished=d.value;if(pr)form.pagesRead=parseInt(pr.value)||0;if(pp)form.pages=parseInt(pp.value)||0;}
+function renderFormOnly(){let el=document.getElementById("bookFormModal");if(!el){render();return;}el.outerHTML=formHTML();}
 
-// ── CHARTS ────────────────────────────────────────────
+// ── CHARTS ──
 function renderCharts(){
   const mc=getComputedStyle(document.documentElement).getPropertyValue("--muted").trim();
   const bc=getComputedStyle(document.documentElement).getPropertyValue("--border").trim();
@@ -1176,97 +905,51 @@ function renderCharts(){
   const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}};
   const tick={color:mc,font:{size:11,family:"Cabin"}};
   const gd=GENRES.map((g,i)=>({n:g,v:books.filter(b=>b.genres&&b.genres.includes(g)).length,c:GCOLS[i%GCOLS.length]})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v).slice(0,8);
-  if(ch.g&&ch.g.destroy)ch.g.destroy();
-  if(ch.s&&ch.s.destroy)ch.s.destroy();
-  if(ch.r&&ch.r.destroy)ch.r.destroy();
-  const cg=document.getElementById("cG");
-  if(cg){if(gd.length){ch.g=new Chart(cg,{type:"doughnut",data:{labels:gd.map(x=>x.n),datasets:[{data:gd.map(x=>x.v),backgroundColor:gd.map(x=>x.c),borderWidth:0}]},options:{...opts,plugins:{legend:{display:true,position:"bottom",labels:{color:mc,font:{size:10,family:"Cabin"},boxWidth:10,padding:8}}}}});}else{cg.parentElement.innerHTML='<p class="no-data">Add genre tags to see this chart</p>';}}
-  const cs=document.getElementById("cS");
-  if(cs){ch.s=new Chart(cs,{type:"bar",data:{labels:["Unread","Reading","Read"],datasets:[{data:STATUSES.map(s=>books.filter(b=>b.status===s).length),backgroundColor:[SC.Unread,SC.Reading,SC.Read],borderRadius:5,borderSkipped:false}]},options:{...opts,scales:{x:{ticks:tick,grid:{display:false}},y:{ticks:{...tick,stepSize:1},grid:{color:bc+"55"}}}}});}
-  const cr=document.getElementById("cR");
-  if(cr){ch.r=new Chart(cr,{type:"bar",data:{labels:["1★","2★","3★","4★","5★"],datasets:[{data:[1,2,3,4,5].map(n=>books.filter(b=>b.rating===n).length),backgroundColor:ac,borderRadius:5,borderSkipped:false}]},options:{...opts,scales:{x:{ticks:tick,grid:{display:false}},y:{ticks:{...tick,stepSize:1},grid:{color:bc+"55"}}}}});}
+  if(ch.g&&ch.g.destroy)ch.g.destroy();if(ch.s&&ch.s.destroy)ch.s.destroy();if(ch.r&&ch.r.destroy)ch.r.destroy();
+  const cg=document.getElementById("cG");if(cg){if(gd.length){ch.g=new Chart(cg,{type:"doughnut",data:{labels:gd.map(x=>x.n),datasets:[{data:gd.map(x=>x.v),backgroundColor:gd.map(x=>x.c),borderWidth:0}]},options:{...opts,plugins:{legend:{display:true,position:"bottom",labels:{color:mc,font:{size:10,family:"Cabin"},boxWidth:10,padding:8}}}}});}else{cg.parentElement.innerHTML='<p class="no-data">Add genre tags to see this chart</p>';}}
+  const cs=document.getElementById("cS");if(cs){ch.s=new Chart(cs,{type:"bar",data:{labels:["Unread","Reading","Read"],datasets:[{data:STATUSES.map(s=>books.filter(b=>b.status===s).length),backgroundColor:[SC.Unread,SC.Reading,SC.Read],borderRadius:5,borderSkipped:false}]},options:{...opts,scales:{x:{ticks:tick,grid:{display:false}},y:{ticks:{...tick,stepSize:1},grid:{color:bc+"55"}}}}});}
+  const cr=document.getElementById("cR");if(cr){ch.r=new Chart(cr,{type:"bar",data:{labels:["1★","2★","3★","4★","5★"],datasets:[{data:[1,2,3,4,5].map(n=>books.filter(b=>b.rating===n).length),backgroundColor:ac,borderRadius:5,borderSkipped:false}]},options:{...opts,scales:{x:{ticks:tick,grid:{display:false}},y:{ticks:{...tick,stepSize:1},grid:{color:bc+"55"}}}}});}
 }
 
-// ── PETTABLE CAT ──────────────────────────────────────
-let petState={happy:0};
-
-
+// ── PET ──
 function petTheCat(){
   petState.happy=Math.min(10,petState.happy+1);
   const img=document.getElementById("mochaGif");
-  if(img){
-    if(petState.happy>=6)img.src=gifs[3];
-    else if(petState.happy>=4)img.src=gifs[2];
-    else if(petState.happy>=2)img.src=gifs[1];
-    else img.src=gifs[0];
-  }
+  if(img){if(petState.happy>=6)img.src=gifs[3];else if(petState.happy>=4)img.src=gifs[2];else if(petState.happy>=2)img.src=gifs[1];else img.src=gifs[0];}
   const h=document.getElementById("petHearts");
-  if(h){
-    const hearts=["♡","♥","♡","♡"];
-    h.textContent=hearts.slice(0,Math.min(petState.happy,4)).join(" ");
-    clearTimeout(petTimer);
-    petTimer=setTimeout(()=>{
-      h.textContent="";
-      petState.happy=Math.max(0,petState.happy-1);
-      const img2=document.getElementById("mochaGif");
-      if(img2){
-        if(petState.happy>=6)img2.src=gifs[3];
-        else if(petState.happy>=4)img2.src=gifs[2];
-        else if(petState.happy>=2)img2.src=gifs[1];
-        else img2.src=gifs[0];
-      }
-    },2500);
-  }
+  if(h){const hearts=["♡","♥","♡","♡"];h.textContent=hearts.slice(0,Math.min(petState.happy,4)).join(" ");clearTimeout(petTimer);petTimer=setTimeout(()=>{h.textContent="";petState.happy=Math.max(0,petState.happy-1);const img2=document.getElementById("mochaGif");if(img2){if(petState.happy>=6)img2.src=gifs[3];else if(petState.happy>=4)img2.src=gifs[2];else if(petState.happy>=2)img2.src=gifs[1];else img2.src=gifs[0];}},2500);}
 }
 
-// ── STEAM ─────────────────────────────────────────────
+// ── STEAM ──
 let steamParts=[];
-function initSteam(){
-  const c=document.getElementById("steamCanvas");
-  if(!c)return;
-  c.width=42;c.height=32;
-}
-function updateSteam(){
-  const c=document.getElementById("steamCanvas");
-  if(!c)return;
-  const ctx=c.getContext("2d");
-  ctx.clearRect(0,0,42,32);
-  if(Math.random()<.12&&steamParts.length<5)steamParts.push({x:21+(Math.random()*5-2.5),y:29,r:1.5+Math.random()*1.5,a:.5+Math.random()*.2,vx:Math.sin(Date.now()/200)*.15});
-  const isDark=document.body.classList.contains("dark");
-  for(let i=steamParts.length-1;i>=0;i--){
-    const p=steamParts[i];p.y-=.35;p.x+=p.vx+Math.sin(p.y/4)*.12;p.a-=.010;p.r+=.03;
-    if(p.a<=0||p.y<0){steamParts.splice(i,1);continue;}
-    ctx.beginPath();ctx.fillStyle=`rgba(230,220,210,${p.a*(isDark?.35:.7)})`;
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-  }
-}
+function initSteam(){const c=document.getElementById("steamCanvas");if(!c)return;c.width=42;c.height=32;}
+function updateSteam(){const c=document.getElementById("steamCanvas");if(!c)return;const ctx=c.getContext("2d");ctx.clearRect(0,0,42,32);if(Math.random()<.12&&steamParts.length<5)steamParts.push({x:21+(Math.random()*5-2.5),y:29,r:1.5+Math.random()*1.5,a:.5+Math.random()*.2,vx:Math.sin(Date.now()/200)*.15});const isDark=document.body.classList.contains("dark");for(let i=steamParts.length-1;i>=0;i--){const p=steamParts[i];p.y-=.35;p.x+=p.vx+Math.sin(p.y/4)*.12;p.a-=.010;p.r+=.03;if(p.a<=0||p.y<0){steamParts.splice(i,1);continue;}ctx.beginPath();ctx.fillStyle=`rgba(230,220,210,${p.a*(isDark?.35:.7)})`;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}}
 
-// ── WANDERING MOCHA ───────────────────────────────────
-// (keep stub so globalTick doesn't error)
 function initWanderMocha(){}
 function drawWanderMocha(){}
 
-// ── MAIN LOOP ─────────────────────────────────────────
-function globalTick(){
-  updateSteam();
-  drawWanderMocha();
-  requestAnimationFrame(globalTick);
-}
-window.addEventListener("resize",()=>{
-  const c=document.getElementById("mochaWander");
-  if(c){c.width=window.innerWidth;c.height=110;}
-});
+function globalTick(){updateSteam();drawWanderMocha();requestAnimationFrame(globalTick);}
+window.addEventListener("resize",()=>{const c=document.getElementById("mochaWander");if(c){c.width=window.innerWidth;c.height=110;}});
 
-// ── BOOT ──────────────────────────────────────────────
+// ── BOOT ──
 load();
-const _today=new Date().toISOString().slice(0,10);
-if(localStorage.getItem("bj_letter_date")===_today){
+const hasVisited = localStorage.getItem("bj_visited") === "1";
+const tutorialDone = localStorage.getItem("bj_tutorial_done") === "1";
+
+if(hasVisited){
+  // Hide the gift overlay immediately — only show it the very first time
   const ov=document.getElementById("giftOverlay");
   if(ov)ov.style.display="none";
 }
+
 render();
 initWanderMocha();
 globalTick();
+
+// If they've visited before but never finished the tutorial, restart it
+if(hasVisited && !tutorialDone){
+  setTimeout(startTutorial, 600);
+}
 </script>
 </body>
 </html>
