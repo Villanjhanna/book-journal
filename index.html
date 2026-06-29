@@ -28,7 +28,6 @@ button{cursor:pointer;font-family:inherit;}
 input,select,textarea{font-family:inherit;}
 .wrap{max-width:1020px;margin:0 auto;padding:0 32px;position:relative;z-index:10;}
 
-/* ── BACKGROUND ── */
 .cafe-bg{position:fixed;inset:0;pointer-events:none;z-index:1;background-image:url('https://giffiles.alphacoders.com/211/211265.gif');background-size:cover;background-position:center;filter:brightness(.75);}
 .cafe-bg::after{content:"";position:absolute;inset:0;background:var(--overlay);transition:background .3s;z-index:2;}
 .string-lights{position:absolute;top:0;left:0;width:100%;height:18px;
@@ -40,7 +39,6 @@ input,select,textarea{font-family:inherit;}
              radial-gradient(circle at 85% 0,var(--sl) 4px,transparent 6px);
   opacity:.7;z-index:5;}
 
-/* ── GIFT OVERLAY ── */
 .gift-overlay{position:fixed;inset:0;background:#2E2218;z-index:300;display:flex;align-items:center;justify-content:center;padding:24px;transition:opacity .5s,transform .5s;}
 .gift-overlay.hidden{opacity:0;pointer-events:none;transform:scale(1.02);}
 .envelope{background:#EADBC8;padding:40px;border-radius:4px;max-width:560px;width:100%;box-shadow:0 20px 40px rgba(0,0,0,.3);border:1px solid #DAC0A3;text-align:center;cursor:pointer;transition:transform .3s;}
@@ -54,14 +52,11 @@ input,select,textarea{font-family:inherit;}
 .letter-btn{background:#8C6239;color:#fff;border:none;border-radius:30px;padding:12px 28px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:16px;transition:background .2s;}
 .letter-btn:hover{background:#4A3319;}
 
-/* ── TUTORIAL OVERLAY ── */
-/* ── TUTORIAL ── */
 .tutorial-overlay{
   position:fixed;inset:0;z-index:400;
   display:flex;align-items:center;justify-content:center;
   pointer-events:none;
 }
-/* SVG mask covers whole screen with a hole cut out */
 #tutorialMaskSvg{
   position:fixed;inset:0;width:100%;height:100%;
   pointer-events:all;z-index:400;
@@ -582,7 +577,7 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-const GENRES=["Fantasy","Comedy","Drama","Romance","Mystery","Sci-Fi","Historical","Thriller","Non-Fiction","Fiction","Horror","Biography","Classics","Poetry","Other"];
+const GENRES=["Fantasy","Comedy","Drama","Adventure","Romance","Mystery","Self-help","Crime","Sci-Fi","Historical","Thriller","Non-Fiction","Fiction","Horror","Biography","Classics","Poetry","Other"];
 const STATUSES=["Unread","Reading","Read"];
 const BINGO_SQUARES=["Annotated a Page","Favorite Quote","Beautiful Cover","Book Hangover","Cried","Finished in One Day","Stayed Up Late Reading","Couldn't Put It Down","Made Me Laugh","Plot Twist","5-Star Read","Recommended It","Wanted a Sequel","Started Immediately","Comfort Read","Slow Start","Unexpected Ending","Loved the Main Character","Loved the Villain","Changed My Perspective","Read with Coffee","Read in the Rain","Bought Because of BookTok","Reread a Chapter","Happy Ending"];
 const GCOLS=["#8C6239","#A07855","#6F4E37","#7A5C3E","#B58255","#916F4F","#5C3E26","#C6A686","#4A3319","#A69180"];
@@ -696,7 +691,6 @@ function startTutorial(){
   showTutorialStep();
 }
 
-// SVG icons for each tutorial step
 const TUTORIAL_ICONS = [
   // Coffee cup — welcome
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`,
@@ -852,7 +846,7 @@ function bingoModalHTML(){
   const b=books.find(x=>x.id===bingoBookId);if(!b)return"";
   const arr=getBingo(b),lines=bingoLines(arr),lineSet=new Set(lines.flat()),bingoCount=lines.length,checked=checkedCount(b);
   const cells=BINGO_SQUARES.map((sq,i)=>{if(i===12)return`<div class="bingo-cell bingo-free">★</div>`;const isChecked=arr[i],isLine=lineSet.has(i);return`<div class="bingo-cell${isChecked?" checked":""}${isLine?" bingo-line":""}" onclick="toggleBingoCell('${b.id}',${i})">${esc(sq)}</div>`;}).join("");
-  return`<div class="bingo-overlay" onclick="closeBingo()"><div class="bingo-modal" onclick="event.stopPropagation()"><div class="bingo-modal-head"><h2>Book Bingo</h2><button class="bingo-modal-close" onclick="closeBingo()">×</button></div><div class="bingo-book-sub">${esc(b.title)}${b.author?" · "+esc(b.author):""}</div><div class="bingo-instructions">Tap each square that appeared in this book. Complete a row, column, or diagonal to get a Bingo!</div><div class="bingo-card-wrap"><div class="bingo-header-row">${"BINGO".split("").map(l=>`<div class="bingo-header-cell">${l}</div>`).join("")}</div><div class="bingo-grid">${cells}</div></div><div class="bingo-footer"><div><div class="bingo-score">${checked} / 24 squares checked${bingoCount>0?` · ${bingoCount} Bingo${bingoCount>1?"s":""}!`:""}</div>${bingoCount>0?`<div class="bingo-congrats">You got a Bingo! ♡</div>`:""}</div><button class="bingo-reset-btn" onclick="resetBingo('${b.id}')">Reset card</button></div></div></div>`;
+  return`<div class="bingo-overlay" onclick="closeBingo()"><div class="bingo-modal" onclick="event.stopPropagation()"><div class="bingo-modal-head"><h2>Book Bingo</h2><button class="bingo-modal-close" onclick="closeBingo()">×</button></div><div class="bingo-book-sub">${esc(b.title)}${b.author?" · "+esc(b.author):""}</div><div class="bingo-instructions">Mark each square that reflects how you felt while reading. Complete a row, column, or diagonal to get a Bingo!</div><div class="bingo-card-wrap"><div class="bingo-header-row">${"BINGO".split("").map(l=>`<div class="bingo-header-cell">${l}</div>`).join("")}</div><div class="bingo-grid">${cells}</div></div><div class="bingo-footer"><div><div class="bingo-score">${checked} / 24 squares checked${bingoCount>0?` · ${bingoCount} Bingo${bingoCount>1?"s":""}!`:""}</div>${bingoCount>0?`<div class="bingo-congrats">You got a Bingo! ♡</div>`:""}</div><button class="bingo-reset-btn" onclick="resetBingo('${b.id}')">Reset card</button></div></div></div>`;
 }
 
 function bingoTabHTML(){
@@ -1030,7 +1024,6 @@ function render(){
   document.getElementById("app").innerHTML=
     headerHTML()+statsBarHTML()+tabsHTML()+
     `<div class="wrap"><div class="content">${tc}</div></div>`+
-    `<footer>Built with love · May your coffee stay warm and your pages never run out ♡</footer>`+
     formHTML()+bingoModalHTML()+wishModalHTML()+mochaRecHTML();
   if(tab==="stats")renderCharts();
   initSteam();
