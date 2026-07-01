@@ -28,7 +28,24 @@ button{cursor:pointer;font-family:inherit;}
 input,select,textarea{font-family:inherit;}
 .wrap{max-width:1020px;margin:0 auto;padding:0 32px;position:relative;z-index:10;}
 
-.cafe-bg{position:fixed;inset:0;pointer-events:none;z-index:1;background-image:url('https://giffiles.alphacoders.com/211/211265.gif');background-size:cover;background-position:center;filter:brightness(.75);}
+.cafe-bg{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+
+    background:
+        radial-gradient(circle at top left,#fff8ef 0%,transparent 45%),
+        radial-gradient(circle at bottom right,#ead7c0 0%,transparent 45%),
+        repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,.04) 0,
+            rgba(255,255,255,.04) 2px,
+            transparent 2px,
+            transparent 12px
+        ),
+        linear-gradient(135deg,#f8f2eb 0%,#efe4d5 100%);
+}
 .cafe-bg::after{content:"";position:absolute;inset:0;background:var(--overlay);transition:background .3s;z-index:2;}
 .string-lights{position:absolute;top:0;left:0;width:100%;height:18px;
   background:radial-gradient(circle at 10% 0,var(--sl) 4px,transparent 6px),
@@ -139,8 +156,8 @@ header{padding:28px 0 0;position:relative;}
 .header-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:0 6px 18px rgba(74,51,25,.08);padding:22px 28px 20px;margin-bottom:12px;}
 .dark .header-card{background:var(--surface);border-color:var(--border);}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.brand h1{font-family:'Lora',serif;font-size:30px;font-weight:700;color:var(--accent);letter-spacing:-.5px;display:flex;align-items:center;gap:10px;}
-.brand p{font-size:14px;color:var(--muted);margin-top:4px;font-style:italic;font-family:'Lora',serif;}
+.brand h1{font-family:'Lora',serif;font-size:28px;font-weight:600;color:var(--accent);letter-spacing:-.5px;display:flex;align-items:baseline;gap:8px;}
+.brand p{font-size:14px;color:var(--muted);margin-top:8px;font-style:italic;font-family:'Lora',serif;}
 .steam-wrap{position:relative;width:34px;height:34px;display:inline-block;}
 #steamCanvas{position:absolute;top:-26px;left:-4px;width:42px;height:32px;pointer-events:none;}
 .header-controls{display:flex;align-items:center;gap:12px;flex-shrink:0;}
@@ -176,7 +193,7 @@ header{padding:28px 0 0;position:relative;}
 .dark .currently-reading{background:var(--surface);border-color:rgba(70,50,34,0.40);height:100%;}
 .cr-label{font-size:10px;font-weight:600;color:var(--accent);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
 .cr-label::before{content:"";width:8px;height:8px;border-radius:50%;background:#C29043;display:inline-block;}
-.cr-cover{width:80px;height:116px;border-radius:3px 8px 8px 3px;flex-shrink:0;box-shadow:-3px 4px 10px rgba(0,0,0,.18),-1px 0 0 rgba(0,0,0,.15) inset;overflow:hidden;background:var(--soft);display:flex;align-items:center;justify-content:center;}
+.cr-cover{width:60px;height:104px;border-radius:3px 8px 8px 3px;flex-shrink:0;box-shadow:-3px 4px 10px rgba(0,0,0,.18),-1px 0 0 rgba(0,0,0,.15) inset;overflow:hidden;background:var(--soft);display:flex;align-items:center;justify-content:center;}
 .cr-cover img{width:100%;height:100%;object-fit:cover;}
 .cr-cover-placeholder{font-family:'Lora',serif;font-size:9px;font-style:italic;color:var(--muted);text-align:center;padding:8px;}
 .cr-info{flex:1;min-width:0;}
@@ -206,13 +223,77 @@ header{padding:28px 0 0;position:relative;}
 .dark .stat-mini-item{background:rgba(40,26,15,0.45);border-color:rgba(70,50,34,0.35);}
 .stat-mini-num{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--accent);}
 .stat-mini-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px;}
-.mood-card{background:var(--surface);border:1px solid rgba(200,178,150,0.40);border-radius:12px;padding:22px;display:flex;flex-direction:column;align-items:center;text-align:center;height:100%;box-sizing:border-box;}
-.dark .mood-card{background:var(--surface);border-color:rgba(70,50,34,0.40);}
-.mood-card h3{font-family:'Lora',serif;font-size:14px;color:var(--accent);margin-bottom:6px;align-self:flex-start;}
-.mood-card p{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:12px;align-self:flex-start;}
-.pet-btn{background:none;border:1px solid var(--border);border-radius:20px;padding:7px 16px;font-size:12px;color:var(--accent);font-weight:600;margin-top:10px;transition:all .2s;letter-spacing:.3px;}
-.pet-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
-.pet-hearts{font-size:14px;min-height:22px;margin-top:2px;color:#E0778A;letter-spacing:2px;}
+/* ── READING MOOD ── */
+.mood-log-card{background:var(--surface);border:1px solid rgba(200,178,150,0.40);border-radius:12px;padding:22px;height:100%;box-sizing:border-box;}
+.dark .mood-log-card{background:var(--surface);border-color:rgba(70,50,34,0.40);}
+.mood-log-card h3{font-family:'Lora',serif;font-size:14px;color:var(--accent);margin-bottom:4px;}
+.mood-log-card > p{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:14px;}
+.mood-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:10px;}
+.mood-chip{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--soft);border:1px solid rgba(200,178,150,0.35);border-radius:10px;padding:9px 4px;text-align:center;transition:all .2s;}
+.dark .mood-chip{background:rgba(40,26,15,0.45);border-color:rgba(70,50,34,0.35);}
+.mood-chip:hover{border-color:var(--accent-light);transform:translateY(-1px);}
+.mood-chip.sel{background:var(--accent);border-color:var(--accent);}
+.mood-chip-emoji{font-size:19px;line-height:1;}
+.mood-chip-lbl{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.2px;}
+.mood-chip.sel .mood-chip-lbl{color:#FFFDF9;}
+.dark .mood-chip.sel .mood-chip-lbl{color:#2E2218;}
+.mood-note-wrap{margin-top:12px;}
+.mood-note-wrap textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--txt);outline:none;resize:vertical;line-height:1.6;font-family:inherit;}
+.mood-note-wrap textarea:focus{border-color:var(--accent);}
+.mood-save-btn{width:100%;margin-top:10px;background:var(--accent);color:#fffdf9;border:none;border-radius:30px;padding:9px;font-size:12px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;transition:opacity .2s;}
+.dark .mood-save-btn{color:#2E2218;}
+.mood-save-btn:hover{opacity:.88;}
+.mood-logged{display:flex;align-items:center;gap:12px;background:var(--soft);border:1px solid rgba(200,178,150,0.35);border-radius:10px;padding:14px;}
+.dark .mood-logged{background:rgba(40,26,15,0.45);border-color:rgba(70,50,34,0.35);}
+.mood-logged-emoji{font-size:28px;line-height:1;flex-shrink:0;}
+.mood-logged-info{flex:1;min-width:0;}
+.mood-logged-lbl{font-family:'Lora',serif;font-size:13px;font-weight:700;color:var(--txt);}
+.mood-logged-note{font-size:11px;color:var(--muted);font-style:italic;margin-top:2px;line-height:1.5;}
+.mood-edit-btn{background:transparent;border:1px solid var(--border);border-radius:20px;padding:4px 11px;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.3px;flex-shrink:0;}
+.mood-edit-btn:hover{border-color:var(--accent-light);color:var(--accent);}
+
+/* ── READING MEMORIES CALENDAR ── */
+.memories-card{margin-top:20px;}
+.memories-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;}
+.memories-head h3{font-family:'Lora',serif;font-size:16px;color:var(--accent);}
+.memories-nav{display:flex;align-items:center;gap:10px;}
+.memories-nav-btn{background:var(--soft);border:1px solid var(--border);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);transition:all .2s;}
+.memories-nav-btn:hover{color:var(--accent);border-color:var(--accent-light);}
+.memories-month-lbl{font-family:'Lora',serif;font-size:13px;font-weight:700;color:var(--txt);min-width:110px;text-align:center;}
+.memories-calendar{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px;}
+.memories-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:8px;}
+.memories-weekday{text-align:center;font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+.memories-days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
+.memories-day{aspect-ratio:1;border-radius:8px;background:var(--surface);border:1px solid rgba(200,178,150,0.30);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;transition:all .15s;}
+.dark .memories-day{border-color:rgba(70,50,34,0.30);}
+.memories-day.pad{background:transparent;border-color:transparent;}
+.memories-day.has-log{cursor:pointer;}
+.memories-day.has-log:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.1);}
+.memories-day.today{outline:1.5px solid var(--accent);outline-offset:-1.5px;}
+.memories-day-num{font-size:9px;color:var(--muted);position:absolute;top:3px;left:5px;}
+.memories-day.has-log .memories-day-num{color:rgba(255,253,249,.85);}
+.memories-day-emoji{line-height:1;margin-top:6px;display:flex;align-items:center;justify-content:center;}
+.memories-day-emoji svg{width:14px;height:14px;stroke:#fff;stroke-width:2.2;}
+.memories-empty-note{font-size:12px;color:var(--muted);font-style:italic;text-align:center;padding:20px 10px;}
+.memories-legend{display:grid;grid-template-columns:repeat(2,1fr);gap:9px 14px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--border);}
+.memories-legend-item{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);}
+.memories-legend-emoji{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.memories-legend-emoji svg{width:11px;height:11px;stroke:#fff;stroke-width:2.2;}
+@media(max-width:400px){.memories-legend{grid-template-columns:1fr;}}
+.memory-overlay{position:fixed;inset:0;background:rgba(30,20,15,.5);z-index:230;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.memory-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:380px;box-shadow:0 20px 50px rgba(46,34,24,.18);}
+.memory-modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+.memory-modal-date{font-family:'Lora',serif;font-size:13px;color:var(--muted);font-style:italic;}
+.memory-modal-close{background:none;border:none;font-size:22px;color:var(--muted);padding:0 6px;line-height:1;border-radius:4px;}
+.memory-modal-close:hover{background:var(--soft);}
+.memory-modal-mood{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.memory-modal-emoji{font-size:34px;line-height:1;}
+.memory-modal-lbl{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--txt);}
+.memory-modal-book{font-size:12px;color:var(--accent);margin-bottom:10px;}
+.memory-modal-note{font-family:'Lora',serif;font-size:13px;line-height:1.7;color:var(--muted);font-style:italic;padding:12px 14px;background:var(--soft);border-radius:8px;border-left:3px solid var(--accent-light);}
+.memory-modal-none{font-size:12px;color:var(--faint);font-style:italic;}
+.memory-modal-del{margin-top:16px;width:100%;background:transparent;color:#b84141;border:1px solid #d9a0a0;font-size:11px;padding:8px;border-radius:30px;font-weight:500;transition:all .2s;letter-spacing:.3px;}
+.memory-modal-del:hover{background:#b84141;color:#fff;border-color:#b84141;}
 .recently-read{margin-top:4px;}
 .recently-read h3{font-family:'Lora',serif;font-size:16px;color:var(--accent);margin-bottom:16px;}
 .recent-row{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;}
@@ -419,12 +500,38 @@ header{padding:28px 0 0;position:relative;}
 .mocha-stat-title{font-family:'Lora',serif;font-size:12px;font-weight:700;color:var(--txt);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .mocha-stat-author{font-size:10px;color:var(--muted);font-style:italic;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .mocha-stat-none{font-family:'Lora',serif;font-size:11px;color:var(--faint);font-style:italic;}
+.stat-pick-hint{
+    margin-top:6px;
+    font-size:11px;
+    color:#9b8068;
+    font-style:italic;
+}
+.stat-pick:hover{
+    background:#f8efe6;
+    transform:translateY(-2px);
+    box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
 
 /* ── REC POPUP ── */
 .rec-overlay{position:fixed;inset:0;background:rgba(30,20,15,.45);z-index:220;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
 .rec-modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:32px 28px;width:100%;max-width:390px;box-shadow:0 20px 50px rgba(46,34,24,.2);text-align:center;position:relative;}
-.rec-pusheen{display:block;width:90px;height:auto;margin:0 auto 14px;}
-.rec-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;line-height:1;padding:3px 7px;border-radius:4px;}
+.rec-icon{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:72px;
+    height:72px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    background:#f7efe5;
+}
+
+.rec-icon svg{
+    width:34px;
+    height:34px;
+    stroke:#8b6b52;
+    stroke-width:2;
+}.rec-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;line-height:1;padding:3px 7px;border-radius:4px;}
 .rec-close:hover{background:var(--soft);}
 .rec-tag{font-size:10px;color:var(--accent);letter-spacing:1.2px;text-transform:uppercase;font-weight:600;margin-bottom:10px;}
 .rec-title{font-family:'Lora',serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:3px;line-height:1.3;}
@@ -439,6 +546,118 @@ header{padding:28px 0 0;position:relative;}
 .rec-btn-pick{background:transparent;color:var(--accent);border:1.5px solid var(--accent);border-radius:30px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
 .rec-btn-pick:hover{background:var(--soft);}
 
+.mood-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    background:#fff;
+    cursor:pointer;
+}
+
+.mood-btn svg{
+    width:18px;
+    height:18px;
+    stroke:#8b6b52;
+}
+
+.mood-btn:hover{
+    background:#f8f3ee;
+}
+.mood-chip.loved {
+    background: #FDF0F3;
+}
+
+.mood-chip.happy {
+    background: #FFF8E6;
+}
+
+.mood-chip.emotional {
+    background: #EEF6FF;
+}
+
+.mood-chip.thoughtful {
+    background: #F6F1EA;
+}
+
+.mood-chip.mindblown {
+    background: #F3EEFF;
+}
+
+.mood-chip.excited {
+    background: #FFF2E7;
+}
+
+.mood-chip.neutral {
+    background: #F8F8F8;
+}
+
+.mood-chip.bored {
+    background: #F5F0EA;
+}
+
+.mood-chip svg{
+    stroke:#8B6A4F;
+}
+
+.stat-mocha-icon{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#f7efe5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.stat-mocha-icon svg{
+    width:22px;
+    height:22px;
+    stroke:#8b6b52;
+    stroke-width:2;
+}
+
+/* ── TODAY'S PICK (dashboard) ── */
+.pick-card-dash{background:var(--surface);border:1px solid rgba(200,178,150,.4);border-radius:12px;padding:18px;}
+.dark .pick-card-dash{border-color:rgba(70,50,34,0.40);}
+.pick-card-top{display:flex;gap:16px;align-items:flex-start;}
+.pick-card-icon{width:42px;height:42px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pick-card-icon svg{width:19px;height:19px;stroke:var(--accent);stroke-width:2;}
+.pick-card-cover{width:56px;height:82px;border-radius:5px;flex-shrink:0;}
+.pick-card-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+.pick-card-cover-ph{
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px;
+    box-sizing:border-box;
+
+    font-family:'Lora',serif;
+    font-size:9px;
+    font-style:italic;
+    color:var(--muted);
+    text-align:center;
+    line-height:1.4;
+
+    background:var(--soft);
+}
+.pick-card-body{flex:1;display:flex;flex-direction:column;}
+.pick-card-actions{display:flex;gap:10px;margin-top:14px;}
+.pick-card-actions button{padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--accent);font-size:12px;font-weight:600;cursor:pointer;transition:.2s;}
+.pick-card-actions button:hover{background:var(--accent);color:#fff;}
+.pick-card-lbl{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:5px;margin-bottom:3px;}
+.pick-card-lbl svg{width:11px;height:11px;stroke:var(--accent);stroke-width:2.4;}
+.pick-card-title{font-family:'Lora',serif;font-size:14px;font-weight:700;color:var(--txt);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pick-card-author{font-size:11px;color:var(--muted);font-style:italic;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pick-card-note{font-size:12px;color:var(--muted);font-style:italic;line-height:1.5;margin-top:6px;}
+
 footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed var(--border);font-family:'Lora',serif;font-size:13px;font-style:italic;color:var(--muted);}
 
 /* ── RESPONSIVE ── */
@@ -447,6 +666,7 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .goals-layout{grid-template-columns:1fr;}
   .wrap{padding:0 16px;}
 }
+
 @media(max-width:580px){
   header{padding:16px 0 0;}
   .header-card{padding:16px 18px 14px;border-radius:14px;}
@@ -456,49 +676,31 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .header-controls{gap:8px;width:100%;justify-content:flex-end;}
   .toggle-dark{padding:7px 12px;font-size:11px;}
   .btn-add{padding:9px 14px;font-size:12px;}
-  .stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;flex-wrap:wrap;}
-  .stat{border-right:1px dashed var(--border);border-bottom:none;padding:14px 6px;}
-  .stat:nth-child(3){border-right:none;}
-  .stat-num{font-size:22px;}
-  .stat-mocha{grid-column:1/-1;border-right:none;border-top:1px dashed var(--border);padding:12px 14px;}
- .tabs{
-    display:flex;
-    flex-wrap:nowrap;
-    gap:3px;
-    margin-top:16px;
-}
+  .stats-row{display:grid;grid-template-columns:repeat(2,1fr);}
 
-.tab{
-    flex:1;
-    padding:8px 4px;
-    font-size:10px;
-    white-space:nowrap;
-    text-align:center;
-}
-.bingo-overlay{
-        padding:12px;
-    }
+  .stat{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:18px 10px;
+      min-height:110px;
+      border-right:1px dashed var(--border);
+      border-bottom:1px dashed var(--border);
+  }
 
-    .bingo-modal{
-        max-width:100%;
-        padding:18px 16px;
-        border-radius:14px;
-    }
+  .stat:nth-child(2),
+  .stat:nth-child(4){border-right:none;}
+  .stat:nth-child(3),
+  .stat:nth-child(4){border-bottom:none;}
+  .tabs{display:flex;flex-wrap:nowrap;gap:3px;margin-top:16px;}
+  .tab{flex:1;padding:8px 4px;font-size:10px;white-space:nowrap;text-align:center;}
+  .bingo-overlay{padding:12px;}
+  .bingo-modal{max-width:100%;padding:18px 16px;border-radius:14px;}
+  .bingo-header-cell{font-size:16px;padding:8px 2px;}
+  .bingo-cell{font-size:7px;padding:3px;line-height:1.15;}
+  .bingo-cell.bingo-free{font-size:18px;}
 
-    .bingo-header-cell{
-        font-size:16px;
-        padding:8px 2px;
-    }
-
-    .bingo-cell{
-        font-size:7px;
-        padding:3px;
-        line-height:1.15;
-    }
-
-    .bingo-cell.bingo-free{
-        font-size:18px;
-    }
   .content{padding:16px;border-radius:0 0 10px 10px;}
   .book-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:36px 16px;}
   .book-cover{height:170px;}
@@ -506,16 +708,15 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   .order-summary{grid-template-columns:1fr 1fr 1fr;}
   .charts-grid{grid-template-columns:1fr;}
   .tutorial-card{max-width:calc(100vw - 24px);border-radius:16px;}
+  .memories-legend{display:none;}
 }
+
 @media(max-width:400px){
   .stats-row{grid-template-columns:1fr 1fr;}
   .stat:nth-child(2){border-right:none;}
   .stat:nth-child(3){border-top:1px dashed var(--border);border-right:1px dashed var(--border);}
   .stat-mocha{grid-column:1/-1;}
 }
-.pet-photo-wrap{position:relative;display:inline-block;cursor:pointer;}
-.pet-photo-wrap img{width:160px;height:160px;object-fit:cover;border-radius:12px;display:block;transition:transform .2s;}
-.pet-photo-wrap:hover img{transform:scale(1.02);}
 </style>
 </head>
 <body>
@@ -530,21 +731,24 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
   </div>
   <div class="letter" id="letterEl">
     <div class="letter-text">
-      <p>Welcome to the Book Café!</p>
-      <p>This little corner was made for readers who love collecting stories, remembering favorites, and discovering their next adventure.</p>
-      <p>Pusheen is always nearby to greet you, recommend a book, and enjoy a cozy afternoon together.</p>
-      <p>Find a comfy seat, pour yourself a warm drink, and enjoy your stay.</p>
-      <p style="font-weight:600;margin-bottom:32px;">— Your Café Keeper ♡</p>
-    </div>
+  <p>Welcome to Book Café!</p>
+
+  <p>Every reader deserves a cozy place to remember the stories that made them smile, think, laugh, or cry.
+  </p>
+  <p>Here, you can build your personal bookshelf, keep track of your reading journey, and look back on every memorable read.
+  </p>
+  <p>We hope this little café becomes a place you'll enjoy returning to, one book at a time.</p>
+  <p style="font-weight:600;margin-bottom:32px;">
+    — Your Café Keeper ♡
+  </p></div>
     <div style="text-align:center;">
       <button class="letter-btn" onclick="enterCafe()">Step Into Your Café</button>
     </div>
   </div>
 </div>
 
-<!-- Tutorial Overlay -->
 <div class="tutorial-overlay" id="tutorialOverlay" style="display:none;">
-  <!-- SVG mask: dark layer with a cutout hole -->
+
   <svg id="tutorialMaskSvg" style="display:none;" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <mask id="tutorialHoleMask">
@@ -573,9 +777,9 @@ footer{text-align:center;padding:32px 0;margin-top:32px;border-top:1px dashed va
 </div>
 
 <div id="app"></div>
-<canvas id="mochaWander" style="position:fixed;bottom:0;left:0;width:100%;height:110px;pointer-events:none;z-index:99;"></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 <script>
 const GENRES=["Fantasy","Comedy","Drama","Adventure","Romance","Mystery","Self-help","Crime","Sci-Fi","Historical","Thriller","Non-Fiction","Fiction","Horror","Biography","Classics","Poetry","Other"];
 const STATUSES=["Unread","Reading","Read"];
@@ -584,6 +788,19 @@ const BINGO_SQUARES = ["Couldn't Put It Down","Book Hangover","Cried","Made Me L
 const SC={"Read":"#5B824E","Reading":"#C29043","Unread":"#948475"};
 const QUOTES=["Between the pages of a book is a lovely place to be.","A reader lives a thousand lives before he dies.","Books are a uniquely portable magic.","There is no friend as loyal as a book.","One must always be careful of books, for words have the power to change us."];
 const READING_NOTES=["Every page turned is a quiet moment spent just for yourself.","Your pace is perfect. Savour every word.","The best time to read is always now.","Books choose their readers as much as readers choose their books."];
+const MOODS = [
+  { key: "loved", icon: "heart", label: "Loved it" },
+  { key: "happy", icon: "sun", label: "Happy" },
+  { key: "emotional", icon: "droplets", label: "Emotional" },
+  { key: "thoughtful", icon: "book-open", label: "Thought-provoking" },
+  { key: "mindblown", icon: "sparkles", label: "Mind-blown" },
+  { key: "excited", icon: "star", label: "Excited" },
+  { key: "neutral", icon: "circle", label: "Neutral" },
+  { key: "bored", icon: "coffee", label: "Bored" }
+];
+
+function getMood(key){return MOODS.find(m=>m.key===key);}
+function todayStr(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 
 function genId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
@@ -594,7 +811,10 @@ let books=[],goal=24,dark=false,tab="dashboard";
 let search="",fG="All",fS="All";
 let showForm=false,editId=null,form={};
 let ch={};
-let petState={happy:0},petTimer=null;
+let moodLogs=[];
+let moodDraftMood=null,moodDraftNote="",editingMood=false;
+let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
+let showMemoryModal=false,memoryModalDate=null;
 let showBingo=false,bingoBookId=null;
 let wishlist=[];
 let showWishForm=false,wishEditId=null,wishForm={};
@@ -605,12 +825,14 @@ function load(){
   try{wishlist=JSON.parse(localStorage.getItem("bj_wish"))||[];}catch{wishlist=[];}
   try{goal=parseInt(localStorage.getItem("bj_g"))||24;}catch{}
   try{dark=localStorage.getItem("bj_d")==="1";}catch{}
+  try{moodLogs=JSON.parse(localStorage.getItem("bj_moods"))||[];}catch{moodLogs=[];}
 }
 function save(){
   localStorage.setItem("bj_b",JSON.stringify(books));
   localStorage.setItem("bj_wish",JSON.stringify(wishlist));
   localStorage.setItem("bj_g",goal);
   localStorage.setItem("bj_d",dark?"1":"0");
+  localStorage.setItem("bj_moods",JSON.stringify(moodLogs));
 }
 
 function applyTheme(){
@@ -656,16 +878,16 @@ const TUTORIAL_STEPS = [
   },
   {
     emoji:"🐱",
-    title:"Pusheen's Pick",
-    body:"Tap the Pusheen section here for a surprise reading recommendation from your unread books. She has very strong opinions.",
-    target:".stat-mocha", placement:"below"
+    title:"Today's Pick",
+    body:"This card on your Home tab gives you a surprise reading recommendation from your unread books.",
+    target:"#todaysPickCard", placement:"below"
   },
   {
     emoji:"🎯",
     title:"Set a reading goal",
     body:"Track how many books you want to read this year. Your progress updates automatically as you mark books finished.",
     target:null, placement:"center"
-  },
+  },  
   {
     emoji:"✨",
     title:"You're all set!",
@@ -881,31 +1103,128 @@ function orderBoardHTML(){
 }
 
 // ── MOCHA REC ──
-const MOCHA_MSGS=["I knocked this one off the shelf this morning — must be a sign.","I've been sitting on top of this one all week. Take the hint!","I pawed at this one until it fell open. Smells promising.","This spine has been calling to me. I think it's your turn.","I curled up on this one during my nap. It felt right.","I chose this one purrsonally. Trust the process.","My whiskers tingled when I walked past this title.","I stared at this one for exactly seven minutes. You know what that means.","This one kept me up at 3am — not that I was reading, just judging.","Found this one behind the cushions. Serendipity!"];
-function pickMochaRec(){const unread=getUnread();if(!unread.length){showMochaRec=true;render();return;}const pool=unread.filter(b=>b.id!==mochaRecId);const pick=pool.length?pool:unread;mochaRecId=pick[Math.floor(Math.random()*pick.length)].id;showMochaRec=true;render();}
+const MOCHA_MSGS = [
+  "Freshly picked from your bookshelf just for today.",
+  "Today's special is waiting for you.",
+  "Can't decide what to read? Start here.",
+  "This title has been waiting patiently on your shelf.",
+  "A cozy recommendation, served fresh.",
+  "Every great reading day begins with a single page.",
+  "Take a chance on today's pick—you might discover a new favorite.",
+  "Here's a little nudge toward your next chapter.",
+  "Your next favorite read could be waiting right here.",
+  "Let today's pick surprise you."
+];function pickMochaRec(){const unread=getUnread();if(!unread.length){showMochaRec=true;render();return;}const pool=unread.filter(b=>b.id!==mochaRecId);const pick=pool.length?pool:unread;mochaRecId=pick[Math.floor(Math.random()*pick.length)].id;showMochaRec=true;render();}
 function closeMochaRec(){showMochaRec=false;render();}
 function startReadingRec(){if(!mochaRecId)return;books=books.map(b=>b.id===mochaRecId?{...b,status:"Reading"}:b);save();showMochaRec=false;render();}
 function mochaRecHTML(){
   if(!showMochaRec)return"";
   const unread=getUnread();
-  if(!unread.length)return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()"><button class="rec-close" onclick="closeMochaRec()">×</button><img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><p class="rec-tag">Pusheen says</p><p class="rec-title" style="font-size:15px;margin-bottom:12px">No unread books!</p><p class="rec-message">Add some books to your shelf first.</p><div class="rec-actions"><button class="rec-btn-start" onclick="closeMochaRec()">Got it ♡</button></div></div></div>`;
+  if(!unread.length)return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()"><button class="rec-close" onclick="closeMochaRec()">×</button><div class="rec-icon">
+    <i data-lucide="book-open"></i>
+</div><p class="rec-title" style="font-size:15px;margin-bottom:12px">No unread books!</p><p class="rec-message">Add some books to your shelf first.</p><div class="rec-actions"><button class="rec-btn-start" onclick="closeMochaRec()">Got it ♡</button></div></div></div>`;
   const b=books.find(x=>x.id===mochaRecId)||unread[0];
   const msg=MOCHA_MSGS[(b.title.length+b.id.charCodeAt(0))%MOCHA_MSGS.length];
-  return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()"><button class="rec-close" onclick="closeMochaRec()">×</button><img class="rec-pusheen" src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><p class="rec-tag">Pusheen's Pick for You</p><div class="rec-title">${esc(b.title)}</div><div class="rec-author">by ${esc(b.author||"Unknown")}</div>${b.genres&&b.genres.length?`<div class="rec-genres">${b.genres.map(g=>`<span class="rec-genre-pill">${esc(g)}</span>`).join("")}</div>`:""}<div class="rec-message">"${esc(msg)}"</div><div class="rec-actions"><button class="rec-btn-start" onclick="startReadingRec()">Start Reading</button><button class="rec-btn-pick" onclick="pickMochaRec()">Pick Another</button></div></div></div>`;
+  return`<div class="rec-overlay" onclick="closeMochaRec()"><div class="rec-modal" onclick="event.stopPropagation()"><button class="rec-close" onclick="closeMochaRec()">×</button><div class="rec-icon">
+    <i data-lucide="book-open"></i>
+</div><p class="rec-tag">Today's Pick for You</p><div class="rec-title">${esc(b.title)}</div><div class="rec-author">by ${esc(b.author||"Unknown")}</div>${b.genres&&b.genres.length?`<div class="rec-genres">${b.genres.map(g=>`<span class="rec-genre-pill">${esc(g)}</span>`).join("")}</div>`:""}<div class="rec-message">"${esc(msg)}"</div><div class="rec-actions"><button class="rec-btn-start" onclick="startReadingRec()">Start Reading</button><button class="rec-btn-pick" onclick="pickMochaRec()">Pick Another</button></div></div></div>`;
+}
+
+// ── READING MOOD ──
+function getMoodLog(date){return moodLogs.find(m=>m.date===date);}
+function moodColor(key){const colors={loved:"#C0604A",happy:"#D9A441",emotional:"#7B93C4",thoughtful:"#8C6239",mindblown:"#9B7EDE",excited:"#E08A4F",neutral:"#A69180",bored:"#7E8B74"};return colors[key]||"#948475";}
+function selectMood(key){moodDraftMood=key;renderMoodCardOnly();}
+function startEditMood(){const log=getMoodLog(todayStr());if(log){moodDraftMood=log.mood;moodDraftNote=log.note||"";}editingMood=true;renderMoodCardOnly();}
+function syncMoodNoteFromDOM(){const t=document.getElementById("moodNoteInput");if(t)moodDraftNote=t.value;}
+function saveMoodLog(){
+  syncMoodNoteFromDOM();
+  if(!moodDraftMood){alert("Pick how today's reading felt first.");return;}
+  const date=todayStr();
+  const cb=currentBook();
+  const entry={date,mood:moodDraftMood,note:moodDraftNote.trim(),bookId:cb?cb.id:null,bookTitle:cb?cb.title:null};
+  moodLogs=moodLogs.filter(m=>m.date!==date);
+  moodLogs.push(entry);
+  save();
+  editingMood=false;moodDraftMood=null;moodDraftNote="";
+  renderMoodCardOnly();
+  renderMemoriesOnly();
+}
+function renderMoodCardOnly(){let el=document.getElementById("moodLogCard");if(!el){render();return;}el.outerHTML=moodLogCardHTML();lucide.createIcons();}
+function moodLogCardHTML(){
+  const date=todayStr(),log=getMoodLog(date);
+  if(log&&!editingMood){
+    const m=getMood(log.mood);
+    return`<div class="mood-log-card" id="moodLogCard"><h3>Today's Mood</h3><p>How today's reading made you feel.</p><div class="mood-logged"><div class="mood-logged-emoji"><i data-lucide="${m.icon}"></i></div><div class="mood-logged-info"><div class="mood-logged-lbl">${m.label}</div>${log.note?`<div class="mood-logged-note">"${esc(log.note)}"</div>`:`<div class="mood-logged-note" style="font-style:normal">Logged for today ♡</div>`}</div><button type="button" class="mood-edit-btn" onclick="startEditMood()">Edit</button></div></div>`;
+  }
+  const picker=MOODS.map(m=>`<button type="button" class="mood-chip${moodDraftMood===m.key?" sel":""}" onclick="selectMood('${m.key}')"><span class="mood-chip-emoji"><i data-lucide="${m.icon}"></i></span><span class="mood-chip-lbl">${m.label}</span></button>`).join("");
+  return`<div class="mood-log-card" id="moodLogCard"><h3>Today's Mood</h3><p>How did today's reading make you feel?</p><div class="mood-picker">${picker}</div><div class="mood-note-wrap"><textarea id="moodNoteInput" rows="2" placeholder="Add a quick note (optional)...">${esc(moodDraftNote)}</textarea></div><button type="button" class="mood-save-btn" onclick="saveMoodLog()">Save Today's Mood</button></div>`;
+}
+
+// ── READING MEMORIES CALENDAR ──
+function prevMonth(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderMemoriesOnly();}
+function nextMonth(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderMemoriesOnly();}
+function openMemory(date){if(!getMoodLog(date))return;memoryModalDate=date;showMemoryModal=true;render();}
+function closeMemory(){showMemoryModal=false;memoryModalDate=null;render();}
+function deleteMemoryLog(date){if(!confirm("Delete this reading memory?"))return;moodLogs=moodLogs.filter(m=>m.date!==date);save();showMemoryModal=false;memoryModalDate=null;render();}
+function renderMemoriesOnly(){const cal=document.getElementById("memoriesCalendar");const wrap=cal?cal.closest(".memories-card"):null;if(!wrap){render();return;}wrap.outerHTML=memoriesCardHTML();lucide.createIcons();}
+function memoriesCardHTML(){
+  const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const first=new Date(calYear,calMonth,1),startDay=first.getDay(),daysInMonth=new Date(calYear,calMonth+1,0).getDate(),today=todayStr();
+  let cells="";
+  for(let i=0;i<startDay;i++)cells+=`<div class="memories-day pad"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const dateStr=calYear+"-"+String(calMonth+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+    const log=getMoodLog(dateStr),isToday=dateStr===today,m=log?getMood(log.mood):null;
+    cells+=`<div class="memories-day${log?" has-log":""}${isToday?" today":""}"${log?` onclick="openMemory('${dateStr}')" style="background:${moodColor(log.mood)}"`:""}><span class="memories-day-num">${d}</span>${m?`<span class="memories-day-emoji"><i data-lucide="${m.icon}"></i></span>`:""}</div>`;
+  }
+  const weekdays=["S","M","T","W","T","F","S"].map(w=>`<div class="memories-weekday">${w}</div>`).join("");
+  const monthPrefix=calYear+"-"+String(calMonth+1).padStart(2,"0");
+  const monthLogs=moodLogs.filter(m=>m.date.startsWith(monthPrefix));
+  return`<div class="memories-card"><div class="memories-head"><h3>Mood Journal</h3><div class="memories-nav"><button type="button" class="memories-nav-btn" onclick="prevMonth()">‹</button><div class="memories-month-lbl">${monthNames[calMonth]} ${calYear}</div><button type="button" class="memories-nav-btn" onclick="nextMonth()">›</button></div></div><div class="memories-calendar" id="memoriesCalendar"><div class="memories-weekdays">${weekdays}</div><div class="memories-days">${cells}</div>${monthLogs.length===0?`<p class="memories-empty-note">No reading moods recorded this month yet. Log today's mood and watch your reading journey come to life.</p>`:`<div class="memories-legend">${MOODS.map(m=>`<div class="memories-legend-item"><span class="memories-legend-emoji" style="background:${moodColor(m.key)}"><i data-lucide="${m.icon}"></i></span>${m.label}</div>`).join("")}</div>`}</div></div>`;
+}
+function memoryModalHTML(){
+  if(!showMemoryModal||!memoryModalDate)return"";
+  const log=getMoodLog(memoryModalDate);
+  if(!log)return"";
+  const m=getMood(log.mood);
+  const d=new Date(memoryModalDate+"T00:00:00");
+  const dateLabel=d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  return`<div class="memory-overlay" onclick="closeMemory()"><div class="memory-modal" onclick="event.stopPropagation()"><div class="memory-modal-head"><div class="memory-modal-date">${esc(dateLabel)}</div><button class="memory-modal-close" onclick="closeMemory()">×</button></div><div class="memory-modal-mood"><div class="memory-modal-emoji"><i data-lucide="${m.icon}"></i></div><div class="memory-modal-lbl">${m.label}</div></div>${log.bookTitle?`<div class="memory-modal-book">📖 while reading <strong>${esc(log.bookTitle)}</strong></div>`:""}${log.note?`<div class="memory-modal-note">"${esc(log.note)}"</div>`:`<div class="memory-modal-none">No note added for this day.</div>`}<button type="button" class="memory-modal-del" onclick="deleteMemoryLog('${memoryModalDate}')">Delete this memory</button></div></div>`;
 }
 
 // ── HTML BUILDERS ──
 function headerHTML(){
   const icon=dark?"☀":"⏾",label=dark?"Light":"Dark";
-  return`<header><div class="wrap"><div class="header-card"><div class="header-inner"><div class="brand"><h1>Book Café <span class="steam-wrap"><canvas id="steamCanvas"></canvas>☕</span></h1><p>Your quiet nook for books, warm thoughts, and lattes</p></div><div class="header-controls"><button class="toggle-dark" onclick="toggleDark()"><span class="toggle-dark-icon">${icon}</span> ${label}</button><button class="btn-add" onclick="openAdd()">+ Add Book</button></div></div></div></div></header>`;
+  return`<header><div class="wrap"><div class="header-card"><div class="header-inner"><div class="brand"><h1>Book Café <span class="steam-wrap"><canvas id="steamCanvas"></canvas>☕︎</span></h1><p>A little corner for your reading memories.</p></div><div class="header-controls"><button class="toggle-dark" onclick="toggleDark()"><span class="toggle-dark-icon">${icon}</span> ${label}</button><button class="btn-add" onclick="openAdd()">+ Add Book</button></div></div></div></div></header>`;
 }
 
 function statsBarHTML(){
-  const unread=getUnread(),rec=unread.find(b=>b.id===mochaRecId)||unread[0];
-  const mochaCell=rec
-    ?`<div class="stat-mocha" onclick="pickMochaRec()" title="Click for Pusheen's recommendation"><img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><div class="stat-mocha-info"><div class="mocha-stat-lbl">Pusheen's Pick</div><div class="mocha-stat-title">${esc(rec.title)}</div><div class="mocha-stat-author">by ${esc(rec.author||"Unknown")}</div></div></div>`
-    :`<div class="stat-mocha" onclick="pickMochaRec()"><img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyNXA1NGgya3E0OHpibnVxdWFxcmFoMGNzaHp3MmlhcDg1OXFpMWdyZCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ckTIzInrGjbQ6spzMQ/200.gif"><div class="stat-mocha-info"><div class="mocha-stat-lbl">Pusheen's Pick</div><div class="mocha-stat-none">Add unread books!</div></div></div>`;
-  return`<div class="wrap"><div class="stats-row"><div class="stat"><div class="stat-num">${books.length}</div><div class="stat-lbl">On Shelf</div></div><div class="stat"><div class="stat-num">${readBooks().length}</div><div class="stat-lbl">Finished</div></div><div class="stat"><div class="stat-num">${books.filter(b=>b.status==="Reading").length}</div><div class="stat-lbl">Reading</div></div>${mochaCell}</div></div>`;
+  return `
+  <div class="wrap">
+    <div class="stats-row">
+
+      <div class="stat">
+        <div class="stat-num">${books.length}</div>
+        <div class="stat-lbl">On Shelf</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-num">${readBooks().length}</div>
+        <div class="stat-lbl">Finished</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-num">${books.filter(b=>b.status==="Reading").length}</div>
+        <div class="stat-lbl">Reading</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-num">${[...new Set(books.flatMap(b=>b.genres))].length}</div>
+        <div class="stat-lbl">Genres Explored</div>
+      </div>
+
+    </div>
+  </div>`;
 }
 
 function tabsHTML(){
@@ -920,7 +1239,50 @@ function currentlyReadingHTML(){
   return`<div class="currently-reading"><div class="cr-cover">${cover}</div><div class="cr-info"><div class="cr-label">Currently Reading</div><div class="cr-title">${esc(cr.title)}</div><div class="cr-author">by ${esc(cr.author||"Unknown")}</div>${cr.notes?`<div class="cr-quote">${esc(cr.notes.slice(0,80))}${cr.notes.length>80?"…":""}</div>`:""}${cr.pages>0?`<div class="cr-progress-bar"><div class="cr-progress-fill" style="width:${pct}%"></div></div><div class="cr-progress-label">${cr.pagesRead||0} / ${cr.pages} pages — ${pct}%</div>`:`<div class="cr-progress-label" style="color:var(--muted);font-style:italic;font-size:11px">Add page info when editing this book</div>`}</div></div>`;
 }
 
-const gifs=["https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTllOHFqY3lvb3g2NHo0Mjd6anUxNzU5Mjl0dzIxNjdkcnQ2NjZhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/JjTeN1ZuJuYik6oDuu/giphy.gif","https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hnYjNieGh3ZGR6d3o1Zm93cWR6NGl0Nmd2cjhnc2UxZ3dvOGlzcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/apow2YS2BEAHB4jV0D/giphy.gif","https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUycW9ybjh4bzEweGozNTJjam1tZjNlMWluNzJ0cWhtaGkwd3hpZzk3cSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/dw4qHGqzP3GCzAAQyQ/source.gif","https://www.gifcen.com/wp-content/uploads/2022/03/pusheen-gif-6.gif"];
+function todaysPickCardHTML(){
+  const unread=getUnread();
+  if(!unread.length){
+    return`<div class="pick-card-dash" id="todaysPickCard"><div class="pick-card-top"><div class="pick-card-icon"><i data-lucide="sparkles"></i></div><div class="pick-card-body"><div class="pick-card-lbl">Today's Pick</div><p class="pick-card-note">Add some unread books and I'll surprise you with one.</p></div></div></div>`;
+  }
+  if(!mochaRecId||!unread.some(b=>b.id===mochaRecId))mochaRecId=unread[Math.floor(Math.random()*unread.length)].id;
+  const b=books.find(x=>x.id===mochaRecId);
+  const msg = MOCHA_MSGS[Math.floor(Math.random() * MOCHA_MSGS.length)];
+  const cover = b.cover? `<img src="${esc(b.cover)}" alt="">` : `<div class="pick-card-cover-ph">${esc(b.title)}</div>`;
+    return `
+    <div class="pick-card-dash" id="todaysPickCard">
+    <div class="pick-card-top">
+        <div class="pick-card-cover">${cover}</div>
+        <div class="pick-card-body">
+        <div class="pick-card-lbl"><i data-lucide="sparkles"></i>
+                Today's Pick
+            </div>
+
+            <div class="pick-card-title">${esc(b.title)}</div>
+
+            <div class="pick-card-author">
+                by ${esc(b.author||"Unknown")}
+            </div>
+
+            <div class="pick-card-note">
+                ${esc(msg)}
+            </div>
+<div class="pick-card-actions">
+        <button type="button" class="pick-card-btn-start" onclick="startReadingFromDash()">
+            Start Reading
+        </button>
+
+        <button type="button" class="pick-card-btn-another" onclick="pickAnotherDash()">
+            Pick Another
+        </button>
+    </div>
+        </div>
+
+    </div>
+
+</div>`;}
+function pickAnotherDash(){const unread=getUnread();if(!unread.length){renderTodaysPickOnly();return;}const pool=unread.filter(b=>b.id!==mochaRecId);const pick=pool.length?pool:unread;mochaRecId=pick[Math.floor(Math.random()*pick.length)].id;renderTodaysPickOnly();}
+function startReadingFromDash(){if(!mochaRecId)return;books=books.map(b=>b.id===mochaRecId?{...b,status:"Reading"}:b);save();render();}
+function renderTodaysPickOnly(){let el=document.getElementById("todaysPickCard");if(!el){render();return;}el.outerHTML=todaysPickCardHTML();lucide.createIcons();}
 
 function dashboardHTML(){
   const read=readBooks(),pct=Math.min(100,Math.round((read.length/goal)*100));
@@ -938,37 +1300,22 @@ function dashboardHTML(){
 </button>    </div>` : "";
 
   return`${emptyShelf}
-    <div class="dash-grid">
+    <div class="dash-grid" style="align-items:start;">
       <div style="display:flex;flex-direction:column;">${currentlyReadingHTML()}</div>
+      ${todaysPickCardHTML()}
+    </div>
+    <div class="dash-grid" style="margin-top:0;align-items:stretch;">
       <div class="goal-card-dash">
-        <h3>Reading Goal ${new Date().getFullYear()}</h3>
+        <h3>My ${new Date().getFullYear()} Reading Goal</h3>
         <div class="goal-big">${read.length} <span>/ ${goal} books</span></div>
         <div class="goal-input-row"><label>Target:</label><input type="number" value="${goal}" min="1" max="999" onchange="setGoal(this.value)"></div>
         <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div>
         <div class="goal-note" style="margin-top:8px">${pct}%${pct>=100?" — Goal reached! ♡":` — ${goal-read.length} to go`}</div>
         <div class="goal-note" style="margin-top:10px">${note}</div>
       </div>
+      ${moodLogCardHTML()}
     </div>
-    <div class="dash-grid" style="margin-top:0;align-items:stretch;">
-      <div class="stats-mini">
-        <h3>Reading Stats</h3>
-        <div class="stats-mini-grid">
-          <div class="stat-mini-item"><div class="stat-mini-num">${read.length}</div><div class="stat-mini-lbl">Books Read</div></div>
-          <div class="stat-mini-item"><div class="stat-mini-num">${avgRating()}</div><div class="stat-mini-lbl">Avg Rating</div></div>
-          <div class="stat-mini-item"><div class="stat-mini-num">${favCount}</div><div class="stat-mini-lbl">Favourites</div></div>
-          <div class="stat-mini-item"><div class="stat-mini-num">${[...new Set(books.flatMap(b=>b.genres))].length}</div><div class="stat-mini-lbl">Genres</div></div>
-        </div>
-      </div>
-      <div class="mood-card">
-        <h3>Mood Café</h3>
-        <p>Pusheen is curled up with a good book.</p>
-        <div class="pet-photo-wrap" onclick="petTheCat()">
-          <img id="mochaGif" src="${gifs[0]}" alt="Pusheen">
-        </div>
-        <div class="pet-hearts" id="petHearts"></div>
-        <button class="pet-btn" onclick="petTheCat()">Pet Pusheen ♡</button>
-      </div>
-    </div>
+    ${memoriesCardHTML()}
     <div class="recently-read" style="margin-top:20px">
       <h3>Recently Read</h3>
       ${recentRead.length===0?`<p style="font-family:'Lora',serif;font-style:italic;color:var(--faint);font-size:13px">Finish a book and it will appear here.</p>`:`<div class="recent-row">${recentRead.map(b=>{const cover=b.cover?`<img src="${esc(b.cover)}" alt="">`:`<div class="recent-placeholder">${esc(b.title)}</div>`;return`<div class="recent-book" onclick="openEdit('${b.id}')"><div class="recent-book-cover">${cover}</div><div class="recent-book-title">${esc(b.title)}</div>${b.rating?`<div class="recent-book-stars">${stars(b.rating)}</div>`:""}</div>`;}).join("")}</div>`}
@@ -991,7 +1338,7 @@ function cardHTML(b){
 
 function favsHTML(){
   const f=books.filter(b=>b.favorite);
-  return`<p class="favs-intro">Volumes that claimed a permanent home in your heart.</p>${f.length===0?`<div class="empty"><div class="empty-title">No favourites yet</div><div class="empty-sub">Heart a book from your shelf</div></div>`:`<div class="book-grid">${f.map(cardHTML).join("")}</div>`}`;
+  return`<p class="favs-intro">Volumes that claimed a permanent home in your heart.</p>${f.length===0?`<div class="empty"><div class="empty-title">No favorites yet</div><div class="empty-sub">Heart a book from your shelf</div></div>`:`<div class="book-grid">${f.map(cardHTML).join("")}</div>`}`;
 }
 
 function statsTabHTML(){return`<div class="charts-grid"><div class="chart-card"><h3>By Genre</h3><div class="chart-wrap"><canvas id="cG"></canvas></div></div><div class="chart-card"><h3>Reading Status</h3><div class="chart-wrap"><canvas id="cS"></canvas></div></div><div class="chart-card"><h3>Ratings</h3><div class="chart-wrap"><canvas id="cR"></canvas></div></div></div>`;}
@@ -1008,7 +1355,7 @@ function formHTML(){
   const f=form,isEdit=!!editId;
   const gTags=GENRES.map(g=>`<button type="button" class="genre-tag${f.genres.includes(g)?" sel":""}" onclick="toggleG('${g}')">${esc(g)}</button>`).join("");
   const rOpts=[0,1,2,3,4,5].map(n=>`<option value="${n}"${f.rating===n?" selected":""}>${n===0?"No rating":stars(n)}</option>`).join("");
-  return`<div class="overlay" id="bookFormModal" onclick="closeForm()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-head"><h2>${isEdit?"Edit Book":"Add a Book"}</h2><button class="modal-close" onclick="closeForm()">×</button></div><div style="text-align:center;margin-bottom:16px"><div class="cover-upload" onclick="document.getElementById('covF').click()">${f.cover?`<img src="${esc(f.cover)}" alt="">`:`<span class="cover-upload-icon">↑</span><span class="cover-upload-lbl">Cover</span>`}</div><button type="button" class="cover-btn" onclick="document.getElementById('covF').click()">Upload cover image</button><input type="file" id="covF" accept="image/*" style="display:none" onchange="handleCover(this)"></div><div class="form-grid"><div class="form-field"><label>Title</label><input type="text" placeholder="Book title" value="${esc(f.title)}" id="fi_title"></div><div class="form-field"><label>Author</label><input type="text" placeholder="Author name" value="${esc(f.author||"")}" id="fi_author"></div><div class="form-half"><div class="form-field"><label>Status</label><select id="fi_status" onchange="syncFormFromDOM();renderFormOnly()">${STATUSES.map(s=>`<option${f.status===s?" selected":""}>${s}</option>`).join("")}</select></div><div class="form-field"><label>Rating</label><select id="fi_rating">${rOpts}</select></div></div>${f.status==="Reading"?`<div class="form-half"><div class="form-field"><label>Pages Read</label><input type="number" placeholder="0" value="${f.pagesRead||0}" id="fi_pagesRead"></div><div class="form-field"><label>Total Pages</label><input type="number" placeholder="0" value="${f.pages||0}" id="fi_pagesTotal"></div></div>`:""}${f.status==="Read"?`<div class="form-field"><label>Date Finished</label><input type="date" value="${esc(f.dateFinished||"")}" id="fi_date"></div>`:""}<div class="form-field"><label>Genres</label><div class="genre-tags">${gTags}</div></div><div class="form-field"><label>Notes</label><textarea placeholder="A quote, a feeling, a thought..." rows="3" id="fi_notes">${esc(f.notes||"")}</textarea></div><label class="fav-label"><input type="checkbox" ${f.favorite?"checked":""} onchange="form.favorite=this.checked"> Mark as a favourite</label><div class="form-btns-row">${isEdit?`<button type="button" class="btn-delete" onclick="delBookFromForm('${editId}')">Remove book</button>`:""}<div class="form-btns"><button type="button" class="btn-save" onclick="saveBook()">${isEdit?"Save Changes":"Place on Shelf"}</button><button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button></div></div></div></div></div>`;
+  return`<div class="overlay" id="bookFormModal" onclick="closeForm()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-head"><h2>${isEdit?"Edit Book":"Add a Book"}</h2><button class="modal-close" onclick="closeForm()">×</button></div><div style="text-align:center;margin-bottom:16px"><div class="cover-upload" onclick="document.getElementById('covF').click()">${f.cover?`<img src="${esc(f.cover)}" alt="">`:`<span class="cover-upload-icon">↑</span><span class="cover-upload-lbl">Cover</span>`}</div><button type="button" class="cover-btn" onclick="document.getElementById('covF').click()">Upload cover image</button><input type="file" id="covF" accept="image/*" style="display:none" onchange="handleCover(this)"></div><div class="form-grid"><div class="form-field"><label>Title</label><input type="text" placeholder="Book title" value="${esc(f.title)}" id="fi_title"></div><div class="form-field"><label>Author</label><input type="text" placeholder="Author name" value="${esc(f.author||"")}" id="fi_author"></div><div class="form-half"><div class="form-field"><label>Status</label><select id="fi_status" onchange="syncFormFromDOM();renderFormOnly()">${STATUSES.map(s=>`<option${f.status===s?" selected":""}>${s}</option>`).join("")}</select></div><div class="form-field"><label>Rating</label><select id="fi_rating">${rOpts}</select></div></div>${f.status==="Reading"?`<div class="form-half"><div class="form-field"><label>Pages Read</label><input type="number" placeholder="0" value="${f.pagesRead||0}" id="fi_pagesRead"></div><div class="form-field"><label>Total Pages</label><input type="number" placeholder="0" value="${f.pages||0}" id="fi_pagesTotal"></div></div>`:""}${f.status==="Read"?`<div class="form-field"><label>Date Finished</label><input type="date" value="${esc(f.dateFinished||"")}" id="fi_date"></div>`:""}<div class="form-field"><label>Genres</label><div class="genre-tags">${gTags}</div></div><div class="form-field"><label>Notes</label><textarea placeholder="A quote, a feeling, a thought..." rows="3" id="fi_notes">${esc(f.notes||"")}</textarea></div><label class="fav-label"><input type="checkbox" ${f.favorite?"checked":""} onchange="form.favorite=this.checked"> Mark as favorite</label><div class="form-btns-row">${isEdit?`<button type="button" class="btn-delete" onclick="delBookFromForm('${editId}')">Remove book</button>`:""}<div class="form-btns"><button type="button" class="btn-save" onclick="saveBook()">${isEdit?"Save Changes":"Place on Shelf"}</button><button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button></div></div></div></div></div>`;
 }
 
 // ── RENDER ──
@@ -1024,9 +1371,10 @@ function render(){
   document.getElementById("app").innerHTML=
     headerHTML()+statsBarHTML()+tabsHTML()+
     `<div class="wrap"><div class="content">${tc}</div></div>`+
-    formHTML()+bingoModalHTML()+wishModalHTML()+mochaRecHTML();
+    formHTML()+bingoModalHTML()+wishModalHTML()+mochaRecHTML()+memoryModalHTML();
   if(tab==="stats")renderCharts();
   initSteam();
+  lucide.createIcons();
 }
 
 // ── ACTIONS ──
@@ -1061,25 +1409,12 @@ function renderCharts(){
   const cr=document.getElementById("cR");if(cr){ch.r=new Chart(cr,{type:"bar",data:{labels:["1★","2★","3★","4★","5★"],datasets:[{data:[1,2,3,4,5].map(n=>books.filter(b=>b.rating===n).length),backgroundColor:ac,borderRadius:5,borderSkipped:false}]},options:{...opts,scales:{x:{ticks:tick,grid:{display:false}},y:{ticks:{...tick,stepSize:1},grid:{color:bc+"55"}}}}});}
 }
 
-// ── PET ──
-function petTheCat(){
-  petState.happy=Math.min(10,petState.happy+1);
-  const img=document.getElementById("mochaGif");
-  if(img){if(petState.happy>=6)img.src=gifs[3];else if(petState.happy>=4)img.src=gifs[2];else if(petState.happy>=2)img.src=gifs[1];else img.src=gifs[0];}
-  const h=document.getElementById("petHearts");
-  if(h){const hearts=["♡","♥","♡","♡"];h.textContent=hearts.slice(0,Math.min(petState.happy,4)).join(" ");clearTimeout(petTimer);petTimer=setTimeout(()=>{h.textContent="";petState.happy=Math.max(0,petState.happy-1);const img2=document.getElementById("mochaGif");if(img2){if(petState.happy>=6)img2.src=gifs[3];else if(petState.happy>=4)img2.src=gifs[2];else if(petState.happy>=2)img2.src=gifs[1];else img2.src=gifs[0];}},2500);}
-}
-
 // ── STEAM ──
 let steamParts=[];
 function initSteam(){const c=document.getElementById("steamCanvas");if(!c)return;c.width=42;c.height=32;}
 function updateSteam(){const c=document.getElementById("steamCanvas");if(!c)return;const ctx=c.getContext("2d");ctx.clearRect(0,0,42,32);if(Math.random()<.12&&steamParts.length<5)steamParts.push({x:21+(Math.random()*5-2.5),y:29,r:1.5+Math.random()*1.5,a:.5+Math.random()*.2,vx:Math.sin(Date.now()/200)*.15});const isDark=document.body.classList.contains("dark");for(let i=steamParts.length-1;i>=0;i--){const p=steamParts[i];p.y-=.35;p.x+=p.vx+Math.sin(p.y/4)*.12;p.a-=.010;p.r+=.03;if(p.a<=0||p.y<0){steamParts.splice(i,1);continue;}ctx.beginPath();ctx.fillStyle=`rgba(230,220,210,${p.a*(isDark?.35:.7)})`;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}}
 
-function initWanderMocha(){}
-function drawWanderMocha(){}
-
-function globalTick(){updateSteam();drawWanderMocha();requestAnimationFrame(globalTick);}
-window.addEventListener("resize",()=>{const c=document.getElementById("mochaWander");if(c){c.width=window.innerWidth;c.height=110;}});
+function globalTick(){updateSteam();requestAnimationFrame(globalTick);}
 
 // ── BOOT ──
 load();
@@ -1093,7 +1428,6 @@ if(hasVisited){
 }
 
 render();
-initWanderMocha();
 globalTick();
 
 // If they've visited before but never finished the tutorial, restart it
